@@ -5,7 +5,10 @@
 </div>
 <h1>Hello, and welcome to Trtl!</h1>
 <p>
-Trtl was designed as an "updated" betastar.js - one that still has the same, and even more functions, but still holds to the same true purpose - chatbots and  modification.
+Trtl was designed as an "updated" betastar.js - one that has even more functions, but still holds to the same true purpose - chatbots and  modification.
 <br>
 Trtl works with BlacketV2, not Betastar.
 </p>
+<h2>Quick notice: For anyone wondering, this was NOT developed out of anger or grudge- I made this in order to allow people to make bots, and express creative freedom in blacket-based projects they're making.</h2>
+<h3>Ready to code? View the <a href="/DOCS.md">docs</a>.</h3>
+<h4>Thank you.</h4>
