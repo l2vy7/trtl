@@ -46,7 +46,7 @@ Using a continuous loop for all of these functions is NOT recommended. You can g
 
 If you do want to make an auto-opener, which is DEFINITELY NOT RECOMMENDED, please use a delay of over 3500 milliseconds to prevent bans.
 
-You MUST either use your real IP address, or a system-wide VPN (system-wide VPNs such as Nord, Express, Proton are all recommended.) The IP address you signed up with MUST be the same IP address that Turtl runs off of. Otherwise, your account may be banned for using two separate IP addresses on the same account.
+You MUST either use your real IP address, or a system-wide VPN (system-wide VPNs such as Nord, Express, Proton are all recommended.) The IP address you signed up with MUST be the same IP address that Trtl runs off of. Otherwise, your account may be banned for using two separate IP addresses on the same account.
 
 - ```TurtleClient``` - The client itself. ```new TurtleClient('session id')```   
     - ```TurtleClient.events``` - The event emitter. ```client.events.on('event', () => {console.log('function');})```
