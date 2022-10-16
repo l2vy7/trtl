@@ -68,4 +68,4 @@ You MUST either use your real IP address, or a system-wide VPN (system-wide VPNs
     - ```getLeaderboard``` - Get people on the leaderboard. ```await client.getLeaderboard()```
     - ```getExistingMessages``` - Get the existing messages in a room. ```await client.getExistingMessages('room')```
     - ```getUser``` - Get detailed information about the bot itself, OR information about other users. ```await client.getUser()```, ```await client.getUser('name')```
-    - ```getSession``` - Get your session ID. **DO NOT SHARE THIS WITH ANYONE, OR YOUR ACCOUNT CAN BE COMPROMISED.** - ``await client.getSession()```
+    - ```getSession``` - Get your session ID. **DO NOT SHARE THIS WITH ANYONE, OR YOUR ACCOUNT CAN BE COMPROMISED.** - ```await client.getSession()```
