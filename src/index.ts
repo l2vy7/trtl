@@ -60,7 +60,7 @@ import {
  * @class
  * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
  * @see {@link http://socket.io SocketIO Documentation} for more information about SocketIO.
- * @see {@link https://github.com/l2vy7/trtl/blob/main/DOCS.md Trtl Documentation} for more information about Trtl.
+ * @see {@link https://trtl.acaiberii.win/docs/ Trtl Documentation} for more information about Trtl.
  */
 export class TurtleClient {
     #session: string;
@@ -85,7 +85,7 @@ export class TurtleClient {
      * @returns {TurtleClient} - The client.
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      * @see {@link http://socket.io SocketIO Documentation} for more information about SocketIO.
-     * @see {@link https://github.com/l2vy7/trtl/blob/main/DOCS.md Trtl Documentation} for more information about Trtl.
+     * @see {@link https://trtl.acaiberii.win/docs/ Trtl Documentation} for more information about Trtl.
      * 
      */
     constructor(session: string, instance: string = "v2.blacket.org") {

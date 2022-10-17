@@ -5,8 +5,8 @@ import { EventEmitter } from "events";
  * @type {TurtleClient}
  * @class
  * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
- * @see {@link http://socket.io SocketIO Documentation} for more information about SocketIO.}
- * @see {@link https://github.com/l2vy7/trtl/blob/main/DOCS.md Trtl Documentation} for more information about Trtl.
+ * @see {@link http://socket.io SocketIO Documentation} for more information about SocketIO.
+ * @see {@link https://trtl.acaiberii.win/docs/ Trtl Documentation} for more information about Trtl.
  */
 export declare class TurtleClient {
     #private;
@@ -23,8 +23,8 @@ export declare class TurtleClient {
      * @param {string} [instance=v2.blacket.org] - The instance Host Name: For example, "v2.blacket.org".
      * @returns {TurtleClient} - The client.
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
-     * @see {@link http://socket.io SocketIO Documentation} for more information about SocketIO.}
-     * @see {@link https://github.com/l2vy7/trtl/blob/main/DOCS.md Trtl Documentation} for more information about Trtl.
+     * @see {@link http://socket.io SocketIO Documentation} for more information about SocketIO.
+     * @see {@link https://trtl.acaiberii.win/docs/ Trtl Documentation} for more information about Trtl.
      *
      */
     constructor(session: string, instance?: string);
@@ -40,7 +40,7 @@ export declare class TurtleClient {
      * @param {string} [name=0room] - The name of the room, which defaults to 0room.
      * @async
      * @returns {Promise} - A promise that must be awaited.
-     * @see {@link http://socket.io SocketIO Documentation} for more information about SocketIO.}
+     * @see {@link http://socket.io SocketIO Documentation} for more information about SocketIO.
      */
     join(room?: string): Promise<void>;
     /**
@@ -143,7 +143,7 @@ export declare class TurtleClient {
      * Add a listener for a particular event from the class's EventEmitter (client.events).
      * @param {string} event - The event's name.
      * @param {any} callback - The callback that is called when the event is received.
-     * @see {@link http://socket.io SocketIO Documentation} for more information about SocketIO.}
+     * @see {@link http://socket.io SocketIO Documentation} for more information about SocketIO.
      * @return {void} - Returns nothing.
      */
     on(event: string, callback: any): void;
@@ -151,7 +151,7 @@ export declare class TurtleClient {
      * Add a listener for a particular event from the Blacket socket.
      * @param {string} event - The event's name.
      * @param {any} callback - The callback that is called when the event is received.
-     * @see {@link http://socket.io SocketIO Documentation} for more information about SocketIO.}
+     * @see {@link http://socket.io SocketIO Documentation} for more information about SocketIO.
      * @returns {void} - Returns nothing.
      */
     socketOn(event: string, callback: any): void;
