@@ -58,9 +58,9 @@ import {
  * The TurtleClient class.
  * @type {TurtleClient}
  * @class
- * @see {@link http://axios-http.com|Axios Documentation}
- * @see {@link http://socket.io|SocketIO Documentation}
- * @see {@link https://github.com/l2vy7/trtl/blob/main/DOCS.md|Trtl Documentation}
+ * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
+ * @see {@link http://socket.io SocketIO Documentation} for more information about SocketIO.
+ * @see {@link https://github.com/l2vy7/trtl/blob/main/DOCS.md Trtl Documentation} for more information about Trtl.
  */
 export class TurtleClient {
     #session: string;
@@ -73,7 +73,7 @@ export class TurtleClient {
     /**
      * The client's EventEmitter.
      * @type {EventEmitter}
-     * @see {@link https://nodejs.org/api/events.html|NodeJS EventEmitter model}
+     * @see {@link https://nodejs.org/api/events.html NodeJS EventEmitter Model} for more information about the NodeJS EventEmitter model.
      */
     events: EventEmitter;
 
@@ -83,9 +83,9 @@ export class TurtleClient {
      * @param {string} session - The Session ID, used to log in to the instance.
      * @param {string} [instance=v2.blacket.org] - The instance Host Name: For example, "v2.blacket.org".
      * @returns {TurtleClient} - The client.
-     * @see {@link http://axios-http.com|Axios Documentation}
-     * @see {@link http://socket.io|SocketIO Documentation}
-     * @see {@link https://github.com/l2vy7/trtl/blob/main/DOCS.md|Trtl Documentation}
+     * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
+     * @see {@link http://socket.io SocketIO Documentation} for more information about SocketIO.
+     * @see {@link https://github.com/l2vy7/trtl/blob/main/DOCS.md Trtl Documentation} for more information about Trtl.
      * 
      */
     constructor(session: string, instance: string = "v2.blacket.org") {
@@ -125,7 +125,7 @@ export class TurtleClient {
      * Log out of your account if required for security or other reasons.
      * @async
      * @returns {Promise} - An Axios request to the /logout endpoint.
-     * @see {@link http://axios-http.com|Axios Documentation}
+     * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async logout() {
         this.#socket.disconnect();
@@ -141,7 +141,7 @@ export class TurtleClient {
      * @param {string} [name=0room] - The name of the room, which defaults to 0room.
      * @async
      * @returns {Promise} - A promise that must be awaited.
-     * @see {@link http://socket.io|SocketIO Documentation}
+     * @see {@link http://socket.io SocketIO Documentation} for more information about SocketIO.
      */
     async join(room: string = "0room") {
         this.#room = room;
@@ -156,7 +156,7 @@ export class TurtleClient {
      * @param {number} [quantity=0] - The quantity to sell.
      * @async
      * @returns {Promise} - An Axios request to the /worker/blooks endpoint.
-     * @see {@link http://axios-http.com|Axios Documentation}
+     * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async sendMessage(message: string, room: string = this.#room) {
         if (room != this.#room) {
@@ -173,7 +173,7 @@ export class TurtleClient {
      * Claim daily tokens.
      * @async
      * @returns {Promise} - An Axios request to the /worker/claim endpoint.
-     * @see {@link http://axios-http.com|Axios Documentation}
+     * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async claim() {
         return await request.get("https://" + this.#instance + "/worker/claim", {
@@ -188,7 +188,7 @@ export class TurtleClient {
      * @param {string} name - The name of the box (or pack) to open.
      * @async
      * @returns {Promise} - An Axios request to the /worker/open endpoint.
-     * @see {@link http://axios-http.com|Axios Documentation}
+     * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async openBox(name: string) {
         return await request.post("https://" + this.#instance + "/worker/open", {
@@ -206,7 +206,7 @@ export class TurtleClient {
      * @param {number} [quantity=0] - The quantity to sell.
      * @async
      * @returns {Promise} - An Axios request to the /worker/sell endpoint.
-     * @see {@link http://axios-http.com|Axios Documentation}
+     * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async sellBlook(name: string, quantity: number = 0) {
         return await request.post("https://" + this.#instance + "/worker/sell", {
@@ -223,7 +223,7 @@ export class TurtleClient {
      * Get the news of the current instance.
      * @async
      * @returns {Promise} - An Axios request to the /worker/news endpoint.
-     * @see {@link http://axios-http.com|Axios Documentation}
+     * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async getNews() {
         return await request.get("https://" + this.#instance + "/worker/news", {
@@ -237,7 +237,7 @@ export class TurtleClient {
      * Get the available packs of blooks.
      * @async
      * @returns {Promise} - An Axios request to the /worker/packs endpoint.
-     * @see {@link http://axios-http.com|Axios Documentation}
+     * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async getPacks() {
         return await request.get("https://" + this.#instance + "/worker/packs", {
@@ -251,7 +251,7 @@ export class TurtleClient {
      * Get the rarities of blooks.
      * @async
      * @returns {Promise} - An Axios request to the /worker/rarities endpoint.
-     * @see {@link http://axios-http.com|Axios Documentation}
+     * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async getRarities() {
         return await request.get("https://" + this.#instance + "/worker/rarities", {
@@ -265,7 +265,7 @@ export class TurtleClient {
      * Get the available blooks.
      * @async
      * @returns {Promise} - An Axios request to the /worker/blooks endpoint.
-     * @see {@link http://axios-http.com|Axios Documentation}
+     * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async getBlooks() {
         return await request.get("https://" + this.#instance + "/worker/blooks", {
@@ -279,7 +279,7 @@ export class TurtleClient {
      * Get the current instance's configuration.
      * @async
      * @returns {Promise} - An Axios request to the /worker/config endpoint.
-     * @see {@link http://axios-http.com|Axios Documentation}
+     * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async getConfig() {
         return await request.get("https://" + this.#instance + "/worker/config", {
@@ -293,7 +293,7 @@ export class TurtleClient {
      * Get users that are on the leaderboard.
      * @async
      * @returns {Promise} - An Axios request to the /worker/leaderboard endpoint.
-     * @see {@link http://axios-http.com|Axios Documentation}
+     * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async getLeaderboard() {
         return await request.get("https://" + this.#instance + "/worker/leaderboard", {
@@ -308,7 +308,7 @@ export class TurtleClient {
      * @param {string} [room=this.#room] - The room to get messages from (defaults to this.#room, which is either 0room or the room you joined).
      * @async
      * @returns {Promise} - An Axios request to the /worker/messages endpoint.
-     * @see {@link http://axios-http.com|Axios Documentation}
+     * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async getExistingMessages(room: string = this.#room) {
         return await request.get("https://" + this.#instance + "/worker/messages/" + room, {
@@ -323,7 +323,7 @@ export class TurtleClient {
      * @param {string} [name=] - A user's name. Leave blank for yourself, or use a string for others.
      * @async
      * @returns {Promise} - An Axios request to the /worker/user endpoint.
-     * @see {@link http://axios-http.com|Axios Documentation}
+     * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async getUser(name: string = "") {
         return await request.get(name === "" ? "https://" + this.#instance + "/worker/user" : "https://" + this.#instance + "/worker/user/" + name, {
@@ -335,7 +335,7 @@ export class TurtleClient {
 
     /**
      * Get the client's session ID. Please do not share this with others: this will allow others to access your account.
-     * @returns {Promise} - A promise that must be awaited.
+     * @returns {string} - The session ID.
      */
     async getSession() {
         return this.#session;
@@ -345,7 +345,8 @@ export class TurtleClient {
      * Add a listener for a particular event from the class's EventEmitter (client.events).
      * @param {string} event - The event's name.
      * @param {any} callback - The callback that is called when the event is received.
-     * @see {@link http://socket.io|SocketIO Documentation}
+     * @see {@link http://socket.io SocketIO Documentation} for more information about SocketIO.
+     * @return {void} - Returns nothing.
      */
     on(event: string, callback: any) {
         this.events.on(event, callback);
@@ -355,7 +356,7 @@ export class TurtleClient {
      * Add a listener for a particular event from the Blacket socket.
      * @param {string} event - The event's name.
      * @param {any} callback - The callback that is called when the event is received.
-     * @see {@link http://socket.io|SocketIO Documentation}
+     * @see {@link http://socket.io SocketIO Documentation} for more information about SocketIO.
      * @returns {void} - Returns nothing.
      */
     socketOn(event: string, callback: any) {
@@ -366,7 +367,7 @@ export class TurtleClient {
      * Emit an event from the class's EventEmitter (client.events).
      * @param {string} event - The event's name.
      * @param {any} data - The event's data.
-     * @see {@link https://nodejs.org/api/events.html|NodeJS EventEmitter model}
+     * @see {@link https://nodejs.org/api/events.html NodeJS EventEmitter Model} for more information about the NodeJS EventEmitter model.
      * @returns {void} - Returns nothing.
      */
     emit(event: string, data: any) {
@@ -378,7 +379,7 @@ export class TurtleClient {
      * Emit an event from the Blacket socket.
      * @param {string} event - The event's name.
      * @param {any} data - The event's data.
-     * @see {@link http://socket.io|SocketIO Documentation}
+     * @see {@link http://socket.io SocketIO Documentation} for more information about SocketIO.
      * @returns {void} - Returns nothing.
      */
     socketEmit(event: string, data: any) {
@@ -390,7 +391,7 @@ export class TurtleClient {
      * @param {string} url - The URL to post.
      * @param {any} body - The body of the request.
      * @param {any} opts - The options of the request.
-     * @see {@link http://axios-http.com|Axios Documentation}
+     * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      * @returns {Promise} An Axios request to the endpoint you choose, with the body and options you choose.
      */
     async post(url: string, body: any, opts: any) {
@@ -402,7 +403,7 @@ export class TurtleClient {
      * Send a GET request to any URL via Axios.
      * @param {string} url - The URL to get.
      * @param {any} opts - The options of the request.
-     * @see {@link http://axios-http.com|Axios Documentation}
+     * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      * @returns {Promise} An Axios request to the endpoint you choose, with the options you choose.
      */
     async get(url: string, opts: any) {
