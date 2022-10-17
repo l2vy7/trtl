@@ -102,14 +102,14 @@ class TurtleClient {
             id: room
         });
     }
-    async sendMessage(message, room) {
+    async sendMessage(message, room = this.#room) {
         if (room != this.#room) {
             this.#room = room;
         }
         this.#socket.emit("chat", {
             type: "send",
             msg: message,
-            room: room
+            room: room || this.#room
         });
     }
     async openBox(name) {
@@ -167,7 +167,7 @@ class TurtleClient {
         });
     }
     async getLeaderboard() {
-        request.get("https://v2.blacket.org/worker/leaderboard", {
+        return await request.get("https://v2.blacket.org/worker/leaderboard", {
             headers: {
                 "Cookie": 'connect.sid=' + this.#session
             }

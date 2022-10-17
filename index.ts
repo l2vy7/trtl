@@ -184,7 +184,7 @@ export class TurtleClient {
     }
 
     async getLeaderboard() {
-        request.get("https://v2.blacket.org/worker/leaderboard", {
+        return await request.get("https://v2.blacket.org/worker/leaderboard", {
             headers: {
                 "Cookie": 'connect.sid=' + this.#session
             }

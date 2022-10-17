@@ -34,7 +34,7 @@ pee = async (cmd) => {
     } else if (raw[0] === "session") {
       console.log('Please wait...');
       console.log('--- SESSION (DO NOT SHARE) ---');
-      console.log(turtle.getSession());
+      console.log(await turtle.getSession());
     } else if (raw[0] === "lb") {
       console.log('Please wait...');
       console.log('--- LEADERBOARD ---');
