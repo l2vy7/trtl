@@ -133,7 +133,10 @@ class TurtleClient {
      * @param {string} [name=0room] - The name of the room, which defaults to 0room.
      * @async
      * @returns {Promise} - A promise that must be awaited.
+<<<<<<< HEAD
      * @see {@link http://socket.io|SocketIO Documentation}
+=======
+>>>>>>> bf9c64f593c5e93d9eb78feb5801aaaa6cd643e0
      */
     async join(room = "0room") {
         this.#room = room;
@@ -160,6 +163,7 @@ class TurtleClient {
         });
     }
     /**
+<<<<<<< HEAD
      * Get daily tokens.
      * @async
      * @returns {Promise} - An Axios request to the /worker/claim endpoint.
@@ -173,6 +177,8 @@ class TurtleClient {
         });
     }
     /**
+=======
+>>>>>>> bf9c64f593c5e93d9eb78feb5801aaaa6cd643e0
      * Open a box (or pack).
      * @param {string} name - The name of the box (or pack) to open.
      * @async
