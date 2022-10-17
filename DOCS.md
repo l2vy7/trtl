@@ -1,3 +1,6 @@
+# MIGRATED TO https://trtl.acaiberii.win/docs
+PLEASE USE THIS INSTEAD OF THESE DOCS.
+
 # Welcome to the Trtl docs!
 Here you'll find information on how to code with Trtl.
 
