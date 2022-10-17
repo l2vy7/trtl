@@ -7,7 +7,19 @@
     "strict": true,
     "skipLibCheck": true,
     "declaration": true,
+    "rootDir": "src",
     "outDir": "dist",
-    "declarationMap": true
-  }
+    "declarationDir": "dist",
+    "declarationMap": true,
+    "composite": true
+  },
+  "include": ["src"],
+  "typedocOptions": {
+    "name": "Trtl",
+    "entryPoints": ["src/index.ts"],
+    "excludeExternals": true,
+    "excludeNotExported": true,
+    "includeVersion": true,
+    "out": "./docs"
+  },
 }
