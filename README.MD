@@ -10,6 +10,7 @@ Trtl was designed as an "updated" betastar.js - one that has even more functions
 Trtl works with BlacketV2, not Betastar.
 </p>
 <h2>Quick notice: For anyone wondering, this was NOT developed out of anger or grudge- I made this in order to allow people to make bots, and express creative freedom in blacket-based projects they're making.</h2>
-<h3>Ready to code? View the <a href="/DOCS.md">docs</a>.</h3>
+<h3>Ready to code? View the <a href="https://trtl.acaiberii.win/docs">docs</a>.</h3>
 <h4>Thank you.</h4>
 <h5><a href="/LOVE.md">hi</a></h5>
+<a href="https://trtl.acaiberii.win/">trtl@acaiberii.win</a>
