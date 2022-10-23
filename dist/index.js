@@ -1,9 +1,21 @@
 "use strict";
+/**
+ * TRTL Library
+ * 2022
+ * < acaiberii.win />
+ *
+ * Forks and modification is allowed, but please include this license.
+ *
+ * Copyright 2022 Acaiberii/L2vy7
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TurtleClient = void 0;
+exports.TurtleContent = exports.TurtleClient = void 0;
 const axios_1 = __importDefault(require("axios"));
 var request = {
     post: function (url, body, opts) {
@@ -32,6 +44,28 @@ var request = {
         Object.assign(opts, {
             method: 'get',
             url: url
+        });
+        Object.assign(opts.headers, {
+            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+            "accept-language": "en-US,en;q=0.9",
+            "cache-control": "max-age=0",
+            "sec-ch-ua": "\"Chromium\";v=\"106\", \"Google Chrome\";v=\"106\", \"Not;A=Brand\";v=\"99\"",
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": "\"Windows\"",
+            "sec-fetch-dest": "document",
+            "sec-fetch-mode": "navigate",
+            "sec-fetch-site": "none",
+            "sec-fetch-user": "?1",
+            "upgrade-insecure-requests": "1",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36"
+        });
+        return (0, axios_1.default)(opts);
+    },
+    stream: function (url, opts) {
+        Object.assign(opts, {
+            method: 'get',
+            url: url,
+            responseType: 'stream'
         });
         Object.assign(opts.headers, {
             "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
@@ -190,7 +224,7 @@ class TurtleClient {
     }
     /**
      * Sell a blook or multiple blooks
-     * @param {string} name - The name of the blook
+     * @param {string} name - The name of the blook.
      * @param {number} [quantity=0] - The quantity to sell.
      * @async
      * @returns {Promise} - An Axios request to the /worker/sell endpoint.
@@ -380,5 +414,113 @@ class TurtleClient {
     async get(url, opts) {
         return await request.get(url, opts);
     }
+    /**
+     * Set your account's banner.
+     * @param {string} name - The name of the banner.
+     * @async
+     * @returns {Promise} - An Axios request to the /worker/set endpoint.
+     * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
+     */
+    async setBanner(name) {
+        return await request.post("https://" + this.#instance + "/worker/set", {
+            type: "banner",
+            banner: name
+        }, {
+            headers: {
+                "Cookie": 'connect.sid=' + this.#session
+            }
+        });
+    }
+    /**
+     * Set your account's blook (icon).
+     * @param {string} name - The name of the icon.
+     * @async
+     * @returns {Promise} - An Axios request to the /worker/set endpoint.
+     * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
+     */
+    async setBlook(name) {
+        return await request.post("https://" + this.#instance + "/worker/set", {
+            type: "blook",
+            blook: name
+        }, {
+            headers: {
+                "Cookie": 'connect.sid=' + this.#session
+            }
+        });
+    }
 }
 exports.TurtleClient = TurtleClient;
+/**
+ * The TurtleContent class. Used to get content from a Blacket instance.
+ * @type {TurtleContent}
+ * @class
+ * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
+ * @see {@link https://trtl.acaiberii.win/docs/ Trtl Documentation} for more information about Trtl.
+ */
+class TurtleContent {
+    #instance;
+    /**
+     * Construct the TurtleContent class.
+     * @constructor
+     * @param {string} [instance=v2.blacket.org] - The instance Host Name: For example, "v2.blacket.org".
+     * @returns {TurtleContent} - The TurtleContent class.
+     * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
+     * @see {@link https://trtl.acaiberii.win/docs/ Trtl Documentation} for more information about Trtl.
+     */
+    constructor(instance = "v2.blacket.org") {
+        this.#instance = instance;
+    }
+    /**
+     * Get the image of a blook by a name. Does not require a Session ID for authentication.
+     * @param {string} name - The name of the blook.
+     * @async
+     * @returns {Promise} - An Axios request to the /content/blooks/ endpoint, to get the blook desired. Returns data in a stream format.
+     * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
+     */
+    async getBlook(name) {
+        return request.stream('https://' + this.#instance + '/content/blooks/' + name + '.png', {});
+    }
+    /**
+     * Get the image of a banner by a name. Does not require a Session ID for authentication.
+     * @param {string} name - The name of the banner.
+     * @async
+     * @returns {Promise} - An Axios request to the /content/banners/ endpoint, to get the banner desired. Returns data in a stream format.
+     * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
+     */
+    async getBanner(name) {
+        return request.stream('https://' + this.#instance + '/content/banners/' + name + '.png', {});
+    }
+    /**
+     * Get a generic image (such as levelStar.png). Does not require a Session ID for authentication.
+     * @param {string} name - The name of the image.
+     * @async
+     * @returns {Promise} - An Axios request to the /content/ endpoint, to get the image desired. Returns data in a stream format.
+     * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
+     */
+    async getGeneric(name) {
+        return request.stream('https://' + this.#instance + '/content/' + name + '.png', {});
+    }
+    /**
+     * Get a generic image from /images/ (such as images/blacketImageRainbow.gif). Does not require a Session ID for authentication.
+     * @param {string} name - The name of the image.
+     * @param {string} [ext=png] - The extension of the image (unlike /content/ where all are .png files).
+     * @async
+     * @returns {Promise} - An Axios request to the /images endpoint, to get the image desired. Returns data in a stream format.
+     * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
+     */
+    async getGenericImages(name, ext = "png") {
+        return request.stream('https://' + this.#instance + '/images/' + name + '.' + ext, {});
+    }
+    /**
+     * Get a stream (preferably an image stream) of a URL.
+     * @param {string} url - The URL to get.
+     * @param {any} opts - The options of the request.
+     * @async
+     * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
+     * @returns {Promise} An Axios request to the endpoint you choose, with the options you choose.
+     */
+    async getStream(url, opts) {
+        return request.stream(url, opts);
+    }
+}
+exports.TurtleContent = TurtleContent;
