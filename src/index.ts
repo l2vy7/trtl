@@ -480,6 +480,46 @@ export class TurtleClient {
             }
         })
     }
+
+    /**
+     * Change your account's username.
+     * @param {string} name - The new username.
+     * @param {string} password - The bot's password.
+     * @async
+     * @returns {Promise} - An Axios request to the /worker/change endpoint.
+     * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
+     */
+    async changeUsername(name: string, password: string) {
+        return await request.post("https://" + this.#instance + "/worker/change", {
+            type : "username",
+            username : name,
+            password: password
+        }, {
+            headers: {
+                "Cookie": 'connect.sid=' + this.#session
+            }
+        })
+    }
+
+    /**
+     * Change your account's password.
+     * @param {string} oldPassword - The bot's old password.
+     * @param {string} newPassword - The bot's new password.
+     * @async
+     * @returns {Promise} - An Axios request to the /worker/change endpoint.
+     * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
+     */
+    async changePassword(oldPassword: string, newPassword: string) {
+        return await request.post("https://" + this.#instance + "/worker/change", {
+            type : "password",
+            oldPassword: oldPassword,
+            newPassword: newPassword
+        }, {
+            headers: {
+                "Cookie": 'connect.sid=' + this.#session
+            }
+        })
+    }
 }
 
 /**

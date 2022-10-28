@@ -216,6 +216,24 @@ export declare class TurtleClient {
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     setBlook(name: string): Promise<import("axios").AxiosResponse<any, any>>;
+    /**
+     * Change your account's username.
+     * @param {string} name - The new username.
+     * @param {string} password - The bot's password.
+     * @async
+     * @returns {Promise} - An Axios request to the /worker/change endpoint.
+     * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
+     */
+    changeUsername(name: string, password: string): Promise<import("axios").AxiosResponse<any, any>>;
+    /**
+     * Change your account's password.
+     * @param {string} oldPassword - The bot's old password.
+     * @param {string} newPassword - The bot's new password.
+     * @async
+     * @returns {Promise} - An Axios request to the /worker/change endpoint.
+     * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
+     */
+    changePassword(oldPassword: string, newPassword: string): Promise<import("axios").AxiosResponse<any, any>>;
 }
 /**
  * The TurtleContent class. Used to get content from a Blacket instance.
