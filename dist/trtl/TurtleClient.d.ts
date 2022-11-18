@@ -27,17 +27,17 @@ export declare class TurtleClient {
      * @see {@link https://trtl.acaiberii.win/docs/ Trtl Documentation} for more information about Trtl.
      *
      */
-    constructor(session: string, instance?: string);
+    constructor(session: string, instance?: string, proxy?: string);
     /**
      * Log out of your account if required for security or other reasons.
      * @async
      * @returns {Promise} - An Axios request to the /logout endpoint.
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
-    logout(): Promise<import("axios").AxiosResponse<any, any>>;
+    logout(): Promise<any>;
     /**
      * Join a specific room, which you can then send messages in or get existing messages from.
-     * @param {string} [name=0room] - The name of the room, which defaults to 0room.
+     * @param {string} [name=global] - The name of the room, which defaults to 0room.
      * @async
      * @returns {Promise} - A promise that must be awaited.
      * @see {@link http://socket.io SocketIO Documentation} for more information about SocketIO.
@@ -45,20 +45,20 @@ export declare class TurtleClient {
     join(room?: string): Promise<void>;
     /**
      * Send a message in a room.
-     * @param {string} name - The name of the blook
-     * @param {number} [quantity=0] - The quantity to sell.
+     * @param {string} message - The content of the message.
      * @async
-     * @returns {Promise} - An Axios request to the /worker/blooks endpoint.
+     * @returns {void} - Returns nothing.
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
+     * @deprecated WARNING: Disabled for Blacket chat update.
      */
-    sendMessage(message: string, room?: string): Promise<void>;
+    send(message: string): Promise<void>;
     /**
      * Claim daily tokens.
      * @async
      * @returns {Promise} - An Axios request to the /worker/claim endpoint.
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
-    claim(): Promise<import("axios").AxiosResponse<any, any>>;
+    claim(): Promise<any>;
     /**
      * Open a box (or pack).
      * @param {string} name - The name of the box (or pack) to open.
@@ -66,7 +66,7 @@ export declare class TurtleClient {
      * @returns {Promise} - An Axios request to the /worker/open endpoint.
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
-    openBox(name: string): Promise<import("axios").AxiosResponse<any, any>>;
+    open(name: string): Promise<any>;
     /**
      * Sell a blook or multiple blooks
      * @param {string} name - The name of the blook.
@@ -75,49 +75,49 @@ export declare class TurtleClient {
      * @returns {Promise} - An Axios request to the /worker/sell endpoint.
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
-    sellBlook(name: string, quantity?: number): Promise<import("axios").AxiosResponse<any, any>>;
+    sell(name: string, quantity?: number): Promise<any>;
     /**
      * Get the news of the current instance.
      * @async
      * @returns {Promise} - An Axios request to the /worker/news endpoint.
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
-    getNews(): Promise<import("axios").AxiosResponse<any, any>>;
+    news(): Promise<any>;
     /**
      * Get the available packs of blooks.
      * @async
      * @returns {Promise} - An Axios request to the /worker/packs endpoint.
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
-    getPacks(): Promise<import("axios").AxiosResponse<any, any>>;
+    packs(): Promise<any>;
     /**
      * Get the rarities of blooks.
      * @async
      * @returns {Promise} - An Axios request to the /worker/rarities endpoint.
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
-    getRarities(): Promise<import("axios").AxiosResponse<any, any>>;
+    rarities(): Promise<any>;
     /**
      * Get the available blooks.
      * @async
      * @returns {Promise} - An Axios request to the /worker/blooks endpoint.
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
-    getBlooks(): Promise<import("axios").AxiosResponse<any, any>>;
+    blooks(): Promise<any>;
     /**
      * Get the current instance's configuration.
      * @async
      * @returns {Promise} - An Axios request to the /worker/config endpoint.
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
-    getConfig(): Promise<import("axios").AxiosResponse<any, any>>;
+    config(): Promise<any>;
     /**
      * Get users that are on the leaderboard.
      * @async
      * @returns {Promise} - An Axios request to the /worker/leaderboard endpoint.
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
-    getLeaderboard(): Promise<import("axios").AxiosResponse<any, any>>;
+    leaderboard(): Promise<any>;
     /**
      * Get existing messages in a channel
      * @param {string} [room=this.#room] - The room to get messages from (defaults to this.#room, which is either 0room or the room you joined).
@@ -125,7 +125,7 @@ export declare class TurtleClient {
      * @returns {Promise} - An Axios request to the /worker/messages endpoint.
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
-    getExistingMessages(room?: string): Promise<import("axios").AxiosResponse<any, any>>;
+    messages(room?: string): Promise<any>;
     /**
      * Get detailed information about yourself, or less detailed information about others.
      * @param {string} [name=] - A user's name. Leave blank for yourself, or use a string for others.
@@ -133,12 +133,12 @@ export declare class TurtleClient {
      * @returns {Promise} - An Axios request to the /worker/user endpoint.
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
-    getUser(name?: string): Promise<import("axios").AxiosResponse<any, any>>;
+    user(name?: string): Promise<any>;
     /**
      * Get the client's session ID. Please do not share this with others: this will allow others to access your account.
      * @returns {string} - The session ID.
      */
-    getSession(): Promise<string>;
+    session(): Promise<string>;
     /**
      * Add a listener for a particular event from the class's EventEmitter (client.events).
      * @param {string} event - The event's name.
@@ -179,7 +179,7 @@ export declare class TurtleClient {
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      * @returns {Promise} An Axios request to the endpoint you choose, with the body and options you choose.
      */
-    post(url: string, body: any, opts: any): Promise<import("axios").AxiosResponse<any, any>>;
+    post(url: string, body: any, opts: any): Promise<any>;
     /**
      * Send a GET request to any URL via Axios.
      * @param {string} url - The URL to get.
@@ -187,7 +187,7 @@ export declare class TurtleClient {
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      * @returns {Promise} An Axios request to the endpoint you choose, with the options you choose.
      */
-    get(url: string, opts: any): Promise<import("axios").AxiosResponse<any, any>>;
+    get(url: string, opts: any): Promise<any>;
     /**
      * Set your account's banner.
      * @param {string} name - The name of the banner.
@@ -195,7 +195,7 @@ export declare class TurtleClient {
      * @returns {Promise} - An Axios request to the /worker/set endpoint.
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
-    setBanner(name: string): Promise<import("axios").AxiosResponse<any, any>>;
+    banner(name: string): Promise<any>;
     /**
      * Set your account's blook (icon).
      * @param {string} name - The name of the icon.
@@ -203,7 +203,7 @@ export declare class TurtleClient {
      * @returns {Promise} - An Axios request to the /worker/set endpoint.
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
-    setBlook(name: string): Promise<import("axios").AxiosResponse<any, any>>;
+    blook(name: string): Promise<any>;
     /**
      * Change your account's username.
      * @param {string} name - The new username.
@@ -212,7 +212,7 @@ export declare class TurtleClient {
      * @returns {Promise} - An Axios request to the /worker/change endpoint.
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
-    changeUsername(name: string, password: string): Promise<import("axios").AxiosResponse<any, any>>;
+    username(name: string, password: string): Promise<any>;
     /**
      * Change your account's password.
      * @param {string} oldPassword - The bot's old password.
@@ -221,6 +221,13 @@ export declare class TurtleClient {
      * @returns {Promise} - An Axios request to the /worker/change endpoint.
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
-    changePassword(oldPassword: string, newPassword: string): Promise<import("axios").AxiosResponse<any, any>>;
+    password(oldPassword: string, newPassword: string): Promise<any>;
+    /**
+     * Set the global request handler's proxy. Also affects TurtleClient.get and TurtleClient.post.
+     * Most used for farming boxes.
+     * @param {string} type - The type (usually http or https) of the proxy.
+     * @param {string} url - The URL of the proxy (excluding https:// or /whatever)
+     */
+    proxy(type: string, url: string): Promise<void>;
 }
 //# sourceMappingURL=TurtleClient.d.ts.map

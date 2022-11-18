@@ -23,7 +23,7 @@ export declare class TurtleContent {
      * @returns {Promise} - An Axios request to the /content/blooks/ endpoint, to get the blook desired. Returns data in a stream format.
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
-    getBlook(name: string): Promise<import("axios").AxiosResponse<any, any>>;
+    getBlook(name: string): Promise<any>;
     /**
      * Get the image of a banner by a name. Does not require a Session ID for authentication.
      * @param {string} name - The name of the banner.
@@ -31,7 +31,7 @@ export declare class TurtleContent {
      * @returns {Promise} - An Axios request to the /content/banners/ endpoint, to get the banner desired. Returns data in a stream format.
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
-    getBanner(name: string): Promise<import("axios").AxiosResponse<any, any>>;
+    getBanner(name: string): Promise<any>;
     /**
      * Get a generic image (such as levelStar.png). Does not require a Session ID for authentication.
      * @param {string} name - The name of the image.
@@ -39,7 +39,7 @@ export declare class TurtleContent {
      * @returns {Promise} - An Axios request to the /content/ endpoint, to get the image desired. Returns data in a stream format.
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
-    getGeneric(name: string): Promise<import("axios").AxiosResponse<any, any>>;
+    getGeneric(name: string): Promise<any>;
     /**
      * Get a generic image from /images/ (such as images/blacketImageRainbow.gif). Does not require a Session ID for authentication.
      * @param {string} name - The name of the image.
@@ -48,7 +48,7 @@ export declare class TurtleContent {
      * @returns {Promise} - An Axios request to the /images endpoint, to get the image desired. Returns data in a stream format.
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
-    getGenericImages(name: string, ext?: string): Promise<import("axios").AxiosResponse<any, any>>;
+    getGenericImages(name: string, ext?: string): Promise<any>;
     /**
      * Get a stream (preferably an image stream) of a URL.
      * @param {string} url - The URL to get.
@@ -57,6 +57,6 @@ export declare class TurtleContent {
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      * @returns {Promise} An Axios request to the endpoint you choose, with the options you choose.
      */
-    getStream(url: string, opts: any): Promise<import("axios").AxiosResponse<any, any>>;
+    getStream(url: string, opts: any): Promise<any>;
 }
 //# sourceMappingURL=TurtleContent.d.ts.map

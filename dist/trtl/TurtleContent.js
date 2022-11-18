@@ -30,7 +30,7 @@ class TurtleContent {
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async getBlook(name) {
-        return request_1.request.stream('https://' + this.#instance + '/content/blooks/' + name + '.png', {});
+        return request_1.request.stream("https://" + this.#instance + "/content/blooks/" + name + ".png", {});
     }
     /**
      * Get the image of a banner by a name. Does not require a Session ID for authentication.
@@ -40,7 +40,7 @@ class TurtleContent {
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async getBanner(name) {
-        return request_1.request.stream('https://' + this.#instance + '/content/banners/' + name + '.png', {});
+        return request_1.request.stream("https://" + this.#instance + "/content/banners/" + name + ".png", {});
     }
     /**
      * Get a generic image (such as levelStar.png). Does not require a Session ID for authentication.
@@ -50,7 +50,7 @@ class TurtleContent {
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async getGeneric(name) {
-        return request_1.request.stream('https://' + this.#instance + '/content/' + name + '.png', {});
+        return request_1.request.stream("https://" + this.#instance + "/content/" + name + ".png", {});
     }
     /**
      * Get a generic image from /images/ (such as images/blacketImageRainbow.gif). Does not require a Session ID for authentication.
@@ -61,7 +61,7 @@ class TurtleContent {
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async getGenericImages(name, ext = "png") {
-        return request_1.request.stream('https://' + this.#instance + '/images/' + name + '.' + ext, {});
+        return request_1.request.stream("https://" + this.#instance + "/images/" + name + "." + ext, {});
     }
     /**
      * Get a stream (preferably an image stream) of a URL.
