@@ -4,36 +4,160 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Trtl</title>
+    <title>Trtl - Home</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
-  <body class="d-flex align-items-center text-center flex-column" style="justify-content: center;">
-    <nav class="navbar navbar-expand-lg bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Trtl</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="/docs">Documentation</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="https://github.com/l2vy7/trtl">Source Code</a>
-                </li>
-            </ul>
-            </div>
-        </div>
-    </nav>
+  <body>
+    <div class="nav">
+      <i class="fa-solid nav-icon"></i>
+    </div>
+    <div class="bar">
+      <div class="tab">
+        <i class="fa-solid fa-house"></i>
+        <a href="/"><h2>Home</h2></a>
+      </div>
+      <div class="tab">
+        <i class="fa-regular fa-paper-plane"></i>
+        <a href="/docs" onclick=""><h2>Docs</h2></a>
+      </div>
+      <div class="tab">
+        <i class="fa-regular fa-circle"></i>
+        <a href="https://github.com/l2vy7/trtl" onclick=""><h2>Source</h2></a>
+      </div>
+      <div class="tab">
+        <i class="fa-solid fa-arrow-right"></i>
+        <a href="#WIP" onclick=""><h2>Migrate</h2></a>
+      </div>
+    </div>
+    <img width="25%" src="https://github.com/l2vy7/trtl/blob/main/assets/img/hi.png?raw=true">
+    <h1>Trtl</h1>
+    <h3>The Blacket V2 bot library that <del>doesn't</del> suck.</h3>
+    <h5>Giving you the backbones at the fastest speeds.</h5>
+    <div class="footer">
+      <h6>Powered by snapui | <a href="https://acaiberii.win">acai@acaiberii.win</a></h6>
+    </div>
+    <style>
+      .nav-icon {
+        color: rgb(255, 255, 255);
+        background-color: rgb(8, 8, 8);
+        padding: 7px;
+        border-radius: 50%;
+        aspect-ratio: 1/1;
+        overflow: clip;
+        transition: all 1s cubic-bezier(1.000, 0.000, 0.000, 1.000);
+        font-size: 30px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        justify-self: center;
+        align-content: cente;
+        align-self: center;
+        pointer-events: none;
+        z-index: 9999;
+        padding-left: 30px;
+        padding-top: 30px;
+        transform: translate(-50%, -50%);
+      }
 
-    <h1>Trtl-Migrate</h1>
-    <h3>VillainsRule's faithful port of BetastarJS to BlacketV2, based on Trtl-Main.</h3>
+      .nav-icon::after {
+        content: "\f0c9";
+      }
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        background-color: black;
+        font-family: 'Courier New', Courier, monospace;
+        color: white !important;
+      }
+
+      body * {
+        flex: 0 1 auto;
+        height: min-content;
+        margin: 0px;
+        padding: 0px;
+      }
+
+      .bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 49px;
+        height: 100%;
+        background-color: rgb(13, 13, 13);
+        border-right: 5px solid white;
+        overflow: clip;
+        transition: all 1s cubic-bezier(0.000, 1.000, 0, 1.000);
+        display: flex;
+        flex-direction: column;
+        align-content: flex-start;
+        justify-content: left;
+        text-align: left;
+        box-sizing: border-box;
+        padding-top: 3%;
+      }
+
+      .bar i {
+        border-radius: 50%;
+        background-color: rgb(30, 30, 30);
+        color: white;
+        font-size: 30px;
+        vertical-align: middle;
+        margin: 5px;
+        margin-right: 20px !important;
+      }
+
+      .bar * {
+        flex: 0 1 auto;
+        height: min-content;
+        align-content: flex-start;
+        text-align: left;
+        vertical-align: middle;
+        text-decoration: none;
+        color: white !important;
+      }
+
+      .bar > div {
+        display: flex;
+        flex-direction: row;
+        transition: all 1s cubic-bezier(0.000, 1.000, 0, 1.000);
+        background-color: rgb(13, 13, 13);
+      }
+
+      .bar > div:hover {
+        background-color: rgb(34, 34, 34);
+        border-top-right-radius: 1rem;
+        border-bottom-right-radius: 1rem;
+        transform: translateX(-55px);
+      }
+
+      .bar:hover {
+        border-width: 0px;
+        width: 20vw;
+      }
+
+      .footer {
+        background-color: black;
+        border-top: 5px solid white;
+        display: flex;
+        text-decoration: none;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+      }
+    </style>
   </body>
 </html>
