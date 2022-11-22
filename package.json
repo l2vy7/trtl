@@ -1,13 +1,18 @@
 {
   "name": "blacket-turtle",
-  "version": "0.0.1",
+  "version": "0.2.5",
   "description": "Trtl: The only Blacket V2 automation library you'll ever need.",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "publish": "npm publish --access public"
   },
   "keywords": [],
   "author": "acaiberii",
   "license": "ISC",
+  "publicConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
   "dependencies": {
     "@types/node": "^18.0.6",
     "axios": "^1.1.3",

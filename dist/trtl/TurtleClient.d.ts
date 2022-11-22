@@ -28,6 +28,7 @@ export declare class TurtleClient {
      *
      */
     constructor(session: string, instance?: string, proxy?: string);
+    wait(): Promise<unknown>;
     /**
      * Log out of your account if required for security or other reasons.
      * @async

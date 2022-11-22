@@ -58,6 +58,19 @@ class TurtleClient {
         this.#socket.on("chat", (data) => {
             this.events.emit("msg", data);
         });
+        this.#socket.on("connect", () => {
+            this.events.emit("connected");
+        });
+        this.#socket.on("disconnect", () => {
+            this.events.emit("disconnected");
+        });
+    }
+    async wait() {
+        return await new Promise((res) => {
+            this.#socket.on('connected', () => {
+                res(this);
+            });
+        });
     }
     /**
      * Log out of your account if required for security or other reasons.
