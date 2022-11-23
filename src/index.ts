@@ -39,3 +39,4 @@ Why are you here?
 */
 export { TurtleClient } from "./trtl/TurtleClient";
 export { TurtleContent } from "./trtl/TurtleContent";
+export { TurtleUtils } from './trtl/TurtleUtils';

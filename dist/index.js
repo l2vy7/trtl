@@ -34,7 +34,7 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TurtleContent = exports.TurtleClient = void 0;
+exports.TurtleUtils = exports.TurtleContent = exports.TurtleClient = void 0;
 /*
 Nothing can be found here. All meaningful classes reside in /trtl...
 Why are you here?
@@ -43,3 +43,5 @@ var TurtleClient_1 = require("./trtl/TurtleClient");
 Object.defineProperty(exports, "TurtleClient", { enumerable: true, get: function () { return TurtleClient_1.TurtleClient; } });
 var TurtleContent_1 = require("./trtl/TurtleContent");
 Object.defineProperty(exports, "TurtleContent", { enumerable: true, get: function () { return TurtleContent_1.TurtleContent; } });
+var TurtleUtils_1 = require("./trtl/TurtleUtils");
+Object.defineProperty(exports, "TurtleUtils", { enumerable: true, get: function () { return TurtleUtils_1.TurtleUtils; } });

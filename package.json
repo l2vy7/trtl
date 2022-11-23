@@ -1,6 +1,6 @@
 {
   "name": "blacket-turtle",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "Trtl: The only Blacket V2 automation library you'll ever need.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
