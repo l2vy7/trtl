@@ -42,7 +42,8 @@ export class TurtleContent {
       code.lastIndexOf("return") + 5,
       code.length - 1
     );
-    TurtleContent.prototype[method] = codeBeforeReturn + code1 + codeAfterReturn;
+    TurtleContent.prototype[method] =
+      codeBeforeReturn + code1 + codeAfterReturn;
   }
 
   /**

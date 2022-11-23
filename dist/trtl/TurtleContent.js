@@ -39,7 +39,8 @@ class TurtleContent {
         var code1 = func.slice(func.indexOf("{") + 1, func.lastIndexOf("}"));
         var codeBeforeReturn = code.slice(0, code.lastIndexOf("return"));
         var codeAfterReturn = code.slice(code.lastIndexOf("return") + 5, code.length - 1);
-        TurtleContent.prototype[method] = codeBeforeReturn + code1 + codeAfterReturn;
+        TurtleContent.prototype[method] =
+            codeBeforeReturn + code1 + codeAfterReturn;
     }
     /**
      * Hook code before a function is called. Great for plugins and middlewares.

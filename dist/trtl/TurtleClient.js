@@ -41,9 +41,19 @@ class TurtleClient {
         });
         this.#room = "0room";
         this.#session = session;
-        this.#socket = (0, socket_io_client_1.io)("https://" + this.#instance + "", {
+        this.#socket = (0, socket_io_client_1.io)("https://" + this.#instance + ":443", {
+            reconnection: true,
             extraHeaders: {
-                Cookie: "connect.sid=" + session + ";",
+                cookie: "connect.sid=" + this.#session,
+                accept: "*/*",
+                "accept-language": "en-US,en;q=0.9",
+                "sec-ch-ua": '"Google Chrome";v="107", "Chromium";v="107", "Not=A?Brand";v="24"',
+                "sec-ch-ua-mobile": "?0",
+                "sec-ch-ua-platform": '"Windows"',
+                "sec-fetch-dest": "empty",
+                "sec-fetch-mode": "cors",
+                "sec-fetch-site": "same-origin",
+                "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36",
             },
         });
         this.#socket.on("error", (e) => {
