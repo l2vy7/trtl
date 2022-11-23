@@ -16,7 +16,7 @@ export class TurtleUtils {
   /**
    * Hook code after a function is called. Great for plugins and middlewares.
    * @param {string} method - The name of the method in the class.
-   * @param {Function} func - The function's code.
+   * @param {Function} funct - The function's code.
    */
   hookAfter(method: string, funct: Function) {
     var mth = TurtleUtils.prototype[method];
@@ -39,7 +39,7 @@ export class TurtleUtils {
   /**
    * Hook code before a function is called. Great for plugins and middlewares.
    * @param {string} method - The name of the method in the class.
-   * @param {Function} func - The function's code.
+   * @param {Function} funct - The function's code.
    */
   hookBefore(method: string, funct: Function) {
     var mth = TurtleUtils.prototype[method];
