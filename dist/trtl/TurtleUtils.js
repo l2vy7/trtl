@@ -15,6 +15,42 @@ const request_1 = require("./util/request");
 class TurtleUtils {
     #instance;
     /**
+     * Hook code after a function is called. Great for plugins and middlewares.
+     * @param {string} method - The name of the method in the class.
+     * @param {Function} func - The function's code.
+     */
+    hookAfter(method, funct) {
+        var mth = TurtleUtils.prototype[method];
+        if (mth === undefined) {
+            TurtleUtils.prototype[method] = funct;
+            return;
+        }
+        var func = funct.toString();
+        var entire = mth.toString();
+        var code = entire.slice(entire.indexOf("{") + 1, entire.lastIndexOf("}"));
+        var code1 = func.slice(func.indexOf("{") + 1, func.lastIndexOf("}"));
+        var codeBeforeReturn = code.slice(0, code.lastIndexOf("return"));
+        var codeAfterReturn = code.slice(code.lastIndexOf("return") + 5, code.length - 1);
+        TurtleUtils.prototype[method] = codeBeforeReturn + code1 + codeAfterReturn;
+    }
+    /**
+     * Hook code before a function is called. Great for plugins and middlewares.
+     * @param {string} method - The name of the method in the class.
+     * @param {Function} func - The function's code.
+     */
+    hookBefore(method, funct) {
+        var mth = TurtleUtils.prototype[method];
+        if (mth === undefined) {
+            TurtleUtils.prototype[method] = funct;
+            return;
+        }
+        var func = funct.toString();
+        var entire = mth.toString();
+        var code = entire.slice(entire.indexOf("{") + 1, entire.lastIndexOf("}"));
+        var code1 = func.slice(func.indexOf("{") + 1, func.lastIndexOf("}"));
+        TurtleUtils.prototype[method] = code1 + code;
+    }
+    /**
      * Since this does not need authentication or options.
      * Construct the utility class.
      * @constructor
@@ -64,7 +100,7 @@ class TurtleUtils {
                 .replace("connect.sid=", "");
         }
         catch (e) {
-            throw new Error('Failed to login.');
+            throw new Error("Failed to login.");
         }
         return cook;
     }

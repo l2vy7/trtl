@@ -11,6 +11,18 @@
 export declare class TurtleUtils {
     #private;
     /**
+     * Hook code after a function is called. Great for plugins and middlewares.
+     * @param {string} method - The name of the method in the class.
+     * @param {Function} func - The function's code.
+     */
+    hookAfter(method: string, funct: Function): void;
+    /**
+     * Hook code before a function is called. Great for plugins and middlewares.
+     * @param {string} method - The name of the method in the class.
+     * @param {Function} func - The function's code.
+     */
+    hookBefore(method: string, funct: Function): void;
+    /**
      * Since this does not need authentication or options.
      * Construct the utility class.
      * @constructor

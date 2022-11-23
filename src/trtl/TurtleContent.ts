@@ -23,6 +23,47 @@ export class TurtleContent {
   }
 
   /**
+   * Hook code after a function is called. Great for plugins and middlewares.
+   * @param {string} method - The name of the method in the class.
+   * @param {Function} func - The function's code.
+   */
+  hookAfter(method: string, funct: Function) {
+    var mth = TurtleContent.prototype[method];
+    if (mth === undefined) {
+      TurtleContent.prototype[method] = funct;
+      return;
+    }
+    var func = funct.toString();
+    var entire = mth.toString();
+    var code = entire.slice(entire.indexOf("{") + 1, entire.lastIndexOf("}"));
+    var code1 = func.slice(func.indexOf("{") + 1, func.lastIndexOf("}"));
+    var codeBeforeReturn = code.slice(0, code.lastIndexOf("return"));
+    var codeAfterReturn = code.slice(
+      code.lastIndexOf("return") + 5,
+      code.length - 1
+    );
+    TurtleContent.prototype[method] = codeBeforeReturn + code1 + codeAfterReturn;
+  }
+
+  /**
+   * Hook code before a function is called. Great for plugins and middlewares.
+   * @param {string} method - The name of the method in the class.
+   * @param {Function} func - The function's code.
+   */
+  hookBefore(method: string, funct: Function) {
+    var mth = TurtleContent.prototype[method];
+    if (mth === undefined) {
+      TurtleContent.prototype[method] = funct;
+      return;
+    }
+    var func = funct.toString();
+    var entire = mth.toString();
+    var code = entire.slice(entire.indexOf("{") + 1, entire.lastIndexOf("}"));
+    var code1 = func.slice(func.indexOf("{") + 1, func.lastIndexOf("}"));
+    TurtleContent.prototype[method] = code1 + code;
+  }
+
+  /**
    * Get the image of a blook by a name. Does not require a Session ID for authentication.
    * @param {string} name - The name of the blook.
    * @async
