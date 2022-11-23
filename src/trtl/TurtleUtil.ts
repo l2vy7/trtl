@@ -8,7 +8,7 @@ import { request } from "./util/request";
  * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
  * @see {@link http://socket.io SocketIO Documentation} for more information about SocketIO.
  * @see {@link https://trtl.acaiberii.win/docs/ Trtl Documentation} for more information about Trtl.
- * 
+ *
  */
 export class TurtleUtils {
   #instance: string;
@@ -35,14 +35,16 @@ export class TurtleUtils {
    * @returns {Promise} - An Axios request to the /logout endpoint.
    * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
    */
-  register(username: string, password: string, accessCode: string) {
-    request.post("https://" + this.#instance + "/worker/register", {
+  async register(username: string, password: string, accessCode: string) {
+    return await request.post(
+      "https://" + this.#instance + "/worker/register",
+      {
         username: username,
         password: password,
-        accessCode: accessCode
-    }, {
-
-    });
+        accessCode: accessCode,
+      },
+      {}
+    );
   }
 
   /**
@@ -50,7 +52,28 @@ export class TurtleUtils {
    * @param {string} username - The user's username.
    * @param {string} password - The user's password.
    */
-  login(username: string, password: string) {
-
+  async login(username: string, password: string) {
+    var cook;
+    try {
+      var resp = await request.post(
+        "https://v2.blacket.org/worker/login",
+        {
+          username: username,
+          password: password,
+        },
+        {
+          headers: {
+            Cookie: "",
+          },
+        }
+      );
+      cook = resp.headers
+        .get("set-cookie")[0]
+        .split("; ")[0]
+        .replace("connect.sid=", "");
+    } catch (e) {
+      throw new Error('Failed to login.')
+    }
+    return cook;
   }
 }

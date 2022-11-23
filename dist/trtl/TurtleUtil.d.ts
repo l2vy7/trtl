@@ -29,12 +29,12 @@ export declare class TurtleUtils {
      * @returns {Promise} - An Axios request to the /logout endpoint.
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
-    register(username: string, password: string, accessCode: string): void;
+    register(username: string, password: string, accessCode: string): Promise<any>;
     /**
      * **THIS IS IMPORTANT** - DO NOT USE THIS METHOD. This is a stub and will do nothing. Support will be implemented in the future.
      * @param {string} username - The user's username.
      * @param {string} password - The user's password.
      */
-    login(username: string, password: string): void;
+    login(username: string, password: string): Promise<any>;
 }
 //# sourceMappingURL=TurtleUtil.d.ts.map

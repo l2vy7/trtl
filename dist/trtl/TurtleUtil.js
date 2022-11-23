@@ -35,11 +35,11 @@ class TurtleUtils {
      * @returns {Promise} - An Axios request to the /logout endpoint.
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
-    register(username, password, accessCode) {
-        request_1.request.post("https://" + this.#instance + "/worker/register", {
+    async register(username, password, accessCode) {
+        return await request_1.request.post("https://" + this.#instance + "/worker/register", {
             username: username,
             password: password,
-            accessCode: accessCode
+            accessCode: accessCode,
         }, {});
     }
     /**
@@ -47,7 +47,26 @@ class TurtleUtils {
      * @param {string} username - The user's username.
      * @param {string} password - The user's password.
      */
-    login(username, password) {
+    async login(username, password) {
+        var cook;
+        try {
+            var resp = await request_1.request.post("https://v2.blacket.org/worker/login", {
+                username: username,
+                password: password,
+            }, {
+                headers: {
+                    Cookie: "",
+                },
+            });
+            cook = resp.headers
+                .get("set-cookie")[0]
+                .split("; ")[0]
+                .replace("connect.sid=", "");
+        }
+        catch (e) {
+            throw new Error('Failed to login.');
+        }
+        return cook;
     }
 }
 exports.TurtleUtils = TurtleUtils;
