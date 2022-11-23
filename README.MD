@@ -24,7 +24,7 @@
     </tr>
     <tr>
         <td>Not well documented, and no documentation is provided (so you have to read thru the source)</td>
-        <td>✅ Link is available. It's in the README.</td>
+        <td>✅ <a href="https://trtl.acaiberii.win/docs">Link</a> is available.</td>
     </tr>
     <tr>
         <td>Sometimes slow, and only works for Betastar.</td>
