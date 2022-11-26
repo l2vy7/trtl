@@ -139,13 +139,12 @@ export declare class TurtleClient {
      */
     leaderboard(): Promise<any>;
     /**
-     * Get existing messages in a channel
-     * @param {string} [room=this.#room] - The room to get messages from (defaults to this.#room, which is either 0room or the room you joined).
+     * Get existing messages in a channel. Be careful, this switches your room.
      * @async
      * @returns {Promise} - An Axios request to the /worker/messages endpoint.
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
-    messages(room?: string): Promise<any>;
+    messages(): Promise<unknown>;
     /**
      * Get detailed information about yourself, or less detailed information about others.
      * @param {string} [name=] - A user's name. Leave blank for yourself, or use a string for others.

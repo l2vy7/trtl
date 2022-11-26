@@ -39,9 +39,11 @@ class TurtleClient {
         this.events = new events_1.EventEmitter({
             captureRejections: true,
         });
-        this.#room = "0room";
+        this.events.setMaxListeners(Infinity);
+        this.#room = "global";
         this.#session = session;
-        this.#socket = (0, socket_io_client_1.io)("https://" + this.#instance + ":443", {
+        this.#socket = (0, socket_io_client_1.io)("https://" + this.#instance, {
+            withCredentials: true,
             reconnection: true,
             extraHeaders: {
                 cookie: "connect.sid=" + this.#session,
@@ -52,10 +54,10 @@ class TurtleClient {
                 "sec-ch-ua-platform": '"Windows"',
                 "sec-fetch-dest": "empty",
                 "sec-fetch-mode": "cors",
-                "sec-fetch-site": "same-origin",
                 "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36",
             },
         });
+        this.#socket.connect();
         this.#socket.on("error", (e) => {
             this.events.emit("error", e);
         });
@@ -113,7 +115,7 @@ class TurtleClient {
     }
     async wait() {
         return await new Promise((res) => {
-            this.#socket.on("connected", () => {
+            this.#socket.on("connect", () => {
                 res(this);
             });
         });
@@ -141,10 +143,11 @@ class TurtleClient {
      */
     async join(room = "global") {
         this.#room = room;
-        this.#socket.emit("join", room);
+        var j = this.#socket.emit("join", room);
         return await new Promise((res) => {
-            this.#socket.once('join', () => {
-                this.#socket.once('info', (d) => {
+            this.#socket.once("join", () => {
+                this.#socket.emit("info");
+                this.#socket.once("info", (d) => {
                     res(d);
                 });
             });
@@ -300,18 +303,21 @@ class TurtleClient {
         })).data;
     }
     /**
-     * Get existing messages in a channel
-     * @param {string} [room=this.#room] - The room to get messages from (defaults to this.#room, which is either 0room or the room you joined).
+     * Get existing messages in a channel. Be careful, this switches your room.
      * @async
      * @returns {Promise} - An Axios request to the /worker/messages endpoint.
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
-    async messages(room = this.#room) {
-        return (await request_1.request.get("https://" + this.#instance + "/worker/messages/" + room, {
-            headers: {
-                Cookie: "connect.sid=" + this.#session,
-            },
-        })).data;
+    async messages() {
+        var j = this.#socket.emit("join", this.#room);
+        return await new Promise((res) => {
+            this.#socket.once("join", () => {
+                this.#socket.emit("info");
+                this.#socket.once("info", (d) => {
+                    res(d);
+                });
+            });
+        });
     }
     /**
      * Get detailed information about yourself, or less detailed information about others.

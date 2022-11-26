@@ -46,9 +46,11 @@ export class TurtleClient {
     this.events = new EventEmitter({
       captureRejections: true,
     });
+    this.events.setMaxListeners(Infinity);
     this.#room = "global";
     this.#session = session;
-    this.#socket = io("https://" + this.#instance + ":443", {
+    this.#socket = io("https://" + this.#instance, {
+      withCredentials: true,
       reconnection: true,
       extraHeaders: {
         cookie: "connect.sid=" + this.#session,
@@ -60,11 +62,11 @@ export class TurtleClient {
         "sec-ch-ua-platform": '"Windows"',
         "sec-fetch-dest": "empty",
         "sec-fetch-mode": "cors",
-        "sec-fetch-site": "same-origin",
         "user-agent":
           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36",
       },
     });
+    this.#socket.connect();
     this.#socket.on("error", (e) => {
       this.events.emit("error", e);
     });
@@ -128,7 +130,7 @@ export class TurtleClient {
 
   async wait() {
     return await new Promise((res) => {
-      this.#socket.on("connected", () => {
+      this.#socket.on("connect", () => {
         res(this);
       });
     });
@@ -142,11 +144,13 @@ export class TurtleClient {
    */
   async logout() {
     this.#socket.disconnect();
-    return (await request.get("https://" + this.#instance + "/logout", {
-      headers: {
-        Cookie: "connect.sid=" + this.#session,
-      },
-    })).data;
+    return (
+      await request.get("https://" + this.#instance + "/logout", {
+        headers: {
+          Cookie: "connect.sid=" + this.#session,
+        },
+      })
+    ).data;
   }
 
   /**
@@ -158,10 +162,11 @@ export class TurtleClient {
    */
   async join(room: string = "global") {
     this.#room = room;
-    this.#socket.emit("join", room);
+    var j = this.#socket.emit("join", room);
     return await new Promise((res) => {
-      this.#socket.once('join', () => {
-        this.#socket.once('info', (d) => {
+      this.#socket.once("join", () => {
+        this.#socket.emit("info");
+        this.#socket.once("info", (d) => {
           res(d);
         });
       });
@@ -187,11 +192,13 @@ export class TurtleClient {
    * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
    */
   async claim() {
-    return (await request.get("https://" + this.#instance + "/worker/claim", {
-      headers: {
-        Cookie: "connect.sid=" + this.#session,
-      },
-    })).data;
+    return (
+      await request.get("https://" + this.#instance + "/worker/claim", {
+        headers: {
+          Cookie: "connect.sid=" + this.#session,
+        },
+      })
+    ).data;
   }
 
   /**
@@ -202,17 +209,19 @@ export class TurtleClient {
    * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
    */
   async open(name: string) {
-    return (await request.post(
-      "https://" + this.#instance + "/worker/open",
-      {
-        pack: name,
-      },
-      {
-        headers: {
-          Cookie: "connect.sid=" + this.#session,
+    return (
+      await request.post(
+        "https://" + this.#instance + "/worker/open",
+        {
+          pack: name,
         },
-      }
-    )).data;
+        {
+          headers: {
+            Cookie: "connect.sid=" + this.#session,
+          },
+        }
+      )
+    ).data;
   }
 
   /**
@@ -224,18 +233,20 @@ export class TurtleClient {
    * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
    */
   async sell(name: string, quantity: number = 0) {
-    return (await request.post(
-      "https://" + this.#instance + "/worker/sell",
-      {
-        blook: name,
-        quantity: quantity.toString(),
-      },
-      {
-        headers: {
-          Cookie: "connect.sid=" + this.#session,
+    return (
+      await request.post(
+        "https://" + this.#instance + "/worker/sell",
+        {
+          blook: name,
+          quantity: quantity.toString(),
         },
-      }
-    )).data;
+        {
+          headers: {
+            Cookie: "connect.sid=" + this.#session,
+          },
+        }
+      )
+    ).data;
   }
 
   /**
@@ -245,11 +256,13 @@ export class TurtleClient {
    * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
    */
   async news() {
-    return (await request.get("https://" + this.#instance + "/worker/news", {
-      headers: {
-        Cookie: "connect.sid=" + this.#session,
-      },
-    })).data;
+    return (
+      await request.get("https://" + this.#instance + "/worker/news", {
+        headers: {
+          Cookie: "connect.sid=" + this.#session,
+        },
+      })
+    ).data;
   }
 
   /**
@@ -259,11 +272,13 @@ export class TurtleClient {
    * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
    */
   async packs() {
-    return (await request.get("https://" + this.#instance + "/worker/packs", {
-      headers: {
-        Cookie: "connect.sid=" + this.#session,
-      },
-    })).data;
+    return (
+      await request.get("https://" + this.#instance + "/worker/packs", {
+        headers: {
+          Cookie: "connect.sid=" + this.#session,
+        },
+      })
+    ).data;
   }
 
   /**
@@ -273,11 +288,13 @@ export class TurtleClient {
    * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
    */
   async rarities() {
-    return (await request.get("https://" + this.#instance + "/worker/rarities", {
-      headers: {
-        Cookie: "connect.sid=" + this.#session,
-      },
-    })).data;
+    return (
+      await request.get("https://" + this.#instance + "/worker/rarities", {
+        headers: {
+          Cookie: "connect.sid=" + this.#session,
+        },
+      })
+    ).data;
   }
 
   /**
@@ -287,11 +304,13 @@ export class TurtleClient {
    * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
    */
   async blooks() {
-    return (await request.get("https://" + this.#instance + "/worker/blooks", {
-      headers: {
-        Cookie: "connect.sid=" + this.#session,
-      },
-    })).data;
+    return (
+      await request.get("https://" + this.#instance + "/worker/blooks", {
+        headers: {
+          Cookie: "connect.sid=" + this.#session,
+        },
+      })
+    ).data;
   }
 
   /**
@@ -301,11 +320,13 @@ export class TurtleClient {
    * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
    */
   async badges() {
-    return (await request.get("https://" + this.#instance + "/worker/badges", {
-      headers: {
-        Cookie: "connect.sid=" + this.#session,
-      },
-    })).data;
+    return (
+      await request.get("https://" + this.#instance + "/worker/badges", {
+        headers: {
+          Cookie: "connect.sid=" + this.#session,
+        },
+      })
+    ).data;
   }
 
   /**
@@ -315,11 +336,13 @@ export class TurtleClient {
    * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
    */
   async config() {
-    return (await request.get("https://" + this.#instance + "/worker/config", {
-      headers: {
-        Cookie: "connect.sid=" + this.#session,
-      },
-    })).data;
+    return (
+      await request.get("https://" + this.#instance + "/worker/config", {
+        headers: {
+          Cookie: "connect.sid=" + this.#session,
+        },
+      })
+    ).data;
   }
 
   /**
@@ -329,14 +352,13 @@ export class TurtleClient {
    * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
    */
   async leaderboard() {
-    return (await request.get(
-      "https://" + this.#instance + "/worker/leaderboard",
-      {
+    return (
+      await request.get("https://" + this.#instance + "/worker/leaderboard", {
         headers: {
           Cookie: "connect.sid=" + this.#session,
         },
-      }
-    )).data;
+      })
+    ).data;
   }
 
   /**
@@ -346,10 +368,11 @@ export class TurtleClient {
    * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
    */
   async messages() {
-    this.#socket.emit("join", this.#room);
+    var j = this.#socket.emit("join", this.#room);
     return await new Promise((res) => {
-      this.#socket.once('join', () => {
-        this.#socket.once('info', (d) => {
+      this.#socket.once("join", () => {
+        this.#socket.emit("info");
+        this.#socket.once("info", (d) => {
           res(d);
         });
       });
@@ -364,16 +387,18 @@ export class TurtleClient {
    * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
    */
   async user(name: string = "") {
-    return (await request.get(
-      name === ""
-        ? "https://" + this.#instance + "/worker/user"
-        : "https://" + this.#instance + "/worker/user/" + name,
-      {
-        headers: {
-          Cookie: "connect.sid=" + this.#session,
-        },
-      }
-    )).data;
+    return (
+      await request.get(
+        name === ""
+          ? "https://" + this.#instance + "/worker/user"
+          : "https://" + this.#instance + "/worker/user/" + name,
+        {
+          headers: {
+            Cookie: "connect.sid=" + this.#session,
+          },
+        }
+      )
+    ).data;
   }
 
   /**
@@ -459,18 +484,20 @@ export class TurtleClient {
    * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
    */
   async banner(name: string) {
-    return (await request.post(
-      "https://" + this.#instance + "/worker/set",
-      {
-        type: "banner",
-        banner: name,
-      },
-      {
-        headers: {
-          Cookie: "connect.sid=" + this.#session,
+    return (
+      await request.post(
+        "https://" + this.#instance + "/worker/set",
+        {
+          type: "banner",
+          banner: name,
         },
-      }
-    )).data;
+        {
+          headers: {
+            Cookie: "connect.sid=" + this.#session,
+          },
+        }
+      )
+    ).data;
   }
 
   /**
@@ -481,18 +508,20 @@ export class TurtleClient {
    * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
    */
   async blook(name: string) {
-    return (await request.post(
-      "https://" + this.#instance + "/worker/set",
-      {
-        type: "blook",
-        blook: name,
-      },
-      {
-        headers: {
-          Cookie: "connect.sid=" + this.#session,
+    return (
+      await request.post(
+        "https://" + this.#instance + "/worker/set",
+        {
+          type: "blook",
+          blook: name,
         },
-      }
-    )).data;
+        {
+          headers: {
+            Cookie: "connect.sid=" + this.#session,
+          },
+        }
+      )
+    ).data;
   }
 
   /**
@@ -504,19 +533,21 @@ export class TurtleClient {
    * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
    */
   async username(name: string, password: string) {
-    return (await request.post(
-      "https://" + this.#instance + "/worker/change",
-      {
-        type: "username",
-        username: name,
-        password: password,
-      },
-      {
-        headers: {
-          Cookie: "connect.sid=" + this.#session,
+    return (
+      await request.post(
+        "https://" + this.#instance + "/worker/change",
+        {
+          type: "username",
+          username: name,
+          password: password,
         },
-      }
-    )).data;
+        {
+          headers: {
+            Cookie: "connect.sid=" + this.#session,
+          },
+        }
+      )
+    ).data;
   }
 
   /**
@@ -528,19 +559,21 @@ export class TurtleClient {
    * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
    */
   async password(oldPassword: string, newPassword: string) {
-    return (await request.post(
-      "https://" + this.#instance + "/worker/change",
-      {
-        type: "password",
-        oldPassword: oldPassword,
-        newPassword: newPassword,
-      },
-      {
-        headers: {
-          Cookie: "connect.sid=" + this.#session,
+    return (
+      await request.post(
+        "https://" + this.#instance + "/worker/change",
+        {
+          type: "password",
+          oldPassword: oldPassword,
+          newPassword: newPassword,
         },
-      }
-    )).data;
+        {
+          headers: {
+            Cookie: "connect.sid=" + this.#session,
+          },
+        }
+      )
+    ).data;
   }
 
   /**
