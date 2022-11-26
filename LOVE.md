@@ -8,7 +8,4 @@ Original developer of Betastar.js, which inspired me to make this project.
 ## Xotic - https://github.com/XOTlC
 Though qaiik and I were recently removed from the dev team since he wanted to work alone, thank you for being a funny guy and helping me fix some problems!
 
-# Show Trtl and Betastar.js some love!
 ![Betastar.js + Trtl](/assets/img/hi.png)
-
-sending 💗 to all u guys.
