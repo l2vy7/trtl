@@ -46,7 +46,7 @@ export class TurtleClient {
     this.events = new EventEmitter({
       captureRejections: true,
     });
-    this.#room = "0room";
+    this.#room = "global";
     this.#session = session;
     this.#socket = io("https://" + this.#instance + ":443", {
       reconnection: true,
@@ -340,21 +340,20 @@ export class TurtleClient {
   }
 
   /**
-   * Get existing messages in a channel
-   * @param {string} [room=this.#room] - The room to get messages from (defaults to this.#room, which is either 0room or the room you joined).
+   * Get existing messages in a channel. Be careful, this switches your room.
    * @async
    * @returns {Promise} - An Axios request to the /worker/messages endpoint.
    * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
    */
-  async messages(room: string = this.#room) {
-    return (await request.get(
-      "https://" + this.#instance + "/worker/messages/" + room,
-      {
-        headers: {
-          Cookie: "connect.sid=" + this.#session,
-        },
-      }
-    )).data;
+  async messages() {
+    this.#socket.emit("join", this.#room);
+    return await new Promise((res) => {
+      this.#socket.once('join', () => {
+        this.#socket.once('info', (d) => {
+          res(d);
+        });
+      });
+    });
   }
 
   /**
