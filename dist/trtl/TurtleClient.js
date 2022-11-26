@@ -126,15 +126,15 @@ class TurtleClient {
      */
     async logout() {
         this.#socket.disconnect();
-        return await request_1.request.get("https://" + this.#instance + "/logout", {
+        return (await request_1.request.get("https://" + this.#instance + "/logout", {
             headers: {
                 Cookie: "connect.sid=" + this.#session,
             },
-        });
+        })).data;
     }
     /**
      * Join a specific room, which you can then send messages in or get existing messages from.
-     * @param {string} [name=global] - The name of the room, which defaults to 0room.
+     * @param {string} [name=global] - The name of the room, which defaults to global.
      * @async
      * @returns {Promise} - A promise that must be awaited.
      * @see {@link http://socket.io SocketIO Documentation} for more information about SocketIO.
@@ -142,6 +142,13 @@ class TurtleClient {
     async join(room = "global") {
         this.#room = room;
         this.#socket.emit("join", room);
+        return await new Promise((res) => {
+            this.#socket.once('join', () => {
+                this.#socket.once('info', (d) => {
+                    res(d);
+                });
+            });
+        });
     }
     /**
      * Send a message in a room.
@@ -161,11 +168,11 @@ class TurtleClient {
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async claim() {
-        return await request_1.request.get("https://" + this.#instance + "/worker/claim", {
+        return (await request_1.request.get("https://" + this.#instance + "/worker/claim", {
             headers: {
                 Cookie: "connect.sid=" + this.#session,
             },
-        });
+        })).data;
     }
     /**
      * Open a box (or pack).
@@ -175,13 +182,13 @@ class TurtleClient {
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async open(name) {
-        return await request_1.request.post("https://" + this.#instance + "/worker/open", {
+        return (await request_1.request.post("https://" + this.#instance + "/worker/open", {
             pack: name,
         }, {
             headers: {
                 Cookie: "connect.sid=" + this.#session,
             },
-        });
+        })).data;
     }
     /**
      * Sell a blook or multiple blooks
@@ -192,14 +199,14 @@ class TurtleClient {
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async sell(name, quantity = 0) {
-        return await request_1.request.post("https://" + this.#instance + "/worker/sell", {
+        return (await request_1.request.post("https://" + this.#instance + "/worker/sell", {
             blook: name,
             quantity: quantity.toString(),
         }, {
             headers: {
                 Cookie: "connect.sid=" + this.#session,
             },
-        });
+        })).data;
     }
     /**
      * Get the news of the current instance.
@@ -208,11 +215,11 @@ class TurtleClient {
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async news() {
-        return await request_1.request.get("https://" + this.#instance + "/worker/news", {
+        return (await request_1.request.get("https://" + this.#instance + "/worker/news", {
             headers: {
                 Cookie: "connect.sid=" + this.#session,
             },
-        });
+        })).data;
     }
     /**
      * Get the available packs of blooks.
@@ -221,11 +228,11 @@ class TurtleClient {
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async packs() {
-        return await request_1.request.get("https://" + this.#instance + "/worker/packs", {
+        return (await request_1.request.get("https://" + this.#instance + "/worker/packs", {
             headers: {
                 Cookie: "connect.sid=" + this.#session,
             },
-        });
+        })).data;
     }
     /**
      * Get the rarities of blooks.
@@ -234,11 +241,11 @@ class TurtleClient {
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async rarities() {
-        return await request_1.request.get("https://" + this.#instance + "/worker/rarities", {
+        return (await request_1.request.get("https://" + this.#instance + "/worker/rarities", {
             headers: {
                 Cookie: "connect.sid=" + this.#session,
             },
-        });
+        })).data;
     }
     /**
      * Get the available blooks.
@@ -247,11 +254,24 @@ class TurtleClient {
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async blooks() {
-        return await request_1.request.get("https://" + this.#instance + "/worker/blooks", {
+        return (await request_1.request.get("https://" + this.#instance + "/worker/blooks", {
             headers: {
                 Cookie: "connect.sid=" + this.#session,
             },
-        });
+        })).data;
+    }
+    /**
+     * Get the available badges.
+     * @async
+     * @returns {Promise} - An Axios request to the /worker/badges endpoint.
+     * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
+     */
+    async badges() {
+        return (await request_1.request.get("https://" + this.#instance + "/worker/badges", {
+            headers: {
+                Cookie: "connect.sid=" + this.#session,
+            },
+        })).data;
     }
     /**
      * Get the current instance's configuration.
@@ -260,11 +280,11 @@ class TurtleClient {
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async config() {
-        return await request_1.request.get("https://" + this.#instance + "/worker/config", {
+        return (await request_1.request.get("https://" + this.#instance + "/worker/config", {
             headers: {
                 Cookie: "connect.sid=" + this.#session,
             },
-        });
+        })).data;
     }
     /**
      * Get users that are on the leaderboard.
@@ -273,11 +293,11 @@ class TurtleClient {
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async leaderboard() {
-        return await request_1.request.get("https://" + this.#instance + "/worker/leaderboard", {
+        return (await request_1.request.get("https://" + this.#instance + "/worker/leaderboard", {
             headers: {
                 Cookie: "connect.sid=" + this.#session,
             },
-        });
+        })).data;
     }
     /**
      * Get existing messages in a channel
@@ -287,11 +307,11 @@ class TurtleClient {
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async messages(room = this.#room) {
-        return await request_1.request.get("https://" + this.#instance + "/worker/messages/" + room, {
+        return (await request_1.request.get("https://" + this.#instance + "/worker/messages/" + room, {
             headers: {
                 Cookie: "connect.sid=" + this.#session,
             },
-        });
+        })).data;
     }
     /**
      * Get detailed information about yourself, or less detailed information about others.
@@ -301,13 +321,13 @@ class TurtleClient {
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async user(name = "") {
-        return await request_1.request.get(name === ""
+        return (await request_1.request.get(name === ""
             ? "https://" + this.#instance + "/worker/user"
             : "https://" + this.#instance + "/worker/user/" + name, {
             headers: {
                 Cookie: "connect.sid=" + this.#session,
             },
-        });
+        })).data;
     }
     /**
      * Get the client's session ID. Please do not share this with others: this will allow others to access your account.
@@ -385,14 +405,14 @@ class TurtleClient {
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async banner(name) {
-        return await request_1.request.post("https://" + this.#instance + "/worker/set", {
+        return (await request_1.request.post("https://" + this.#instance + "/worker/set", {
             type: "banner",
             banner: name,
         }, {
             headers: {
                 Cookie: "connect.sid=" + this.#session,
             },
-        });
+        })).data;
     }
     /**
      * Set your account's blook (icon).
@@ -402,14 +422,14 @@ class TurtleClient {
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async blook(name) {
-        return await request_1.request.post("https://" + this.#instance + "/worker/set", {
+        return (await request_1.request.post("https://" + this.#instance + "/worker/set", {
             type: "blook",
             blook: name,
         }, {
             headers: {
                 Cookie: "connect.sid=" + this.#session,
             },
-        });
+        })).data;
     }
     /**
      * Change your account's username.
@@ -420,7 +440,7 @@ class TurtleClient {
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async username(name, password) {
-        return await request_1.request.post("https://" + this.#instance + "/worker/change", {
+        return (await request_1.request.post("https://" + this.#instance + "/worker/change", {
             type: "username",
             username: name,
             password: password,
@@ -428,7 +448,7 @@ class TurtleClient {
             headers: {
                 Cookie: "connect.sid=" + this.#session,
             },
-        });
+        })).data;
     }
     /**
      * Change your account's password.
@@ -439,7 +459,7 @@ class TurtleClient {
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async password(oldPassword, newPassword) {
-        return await request_1.request.post("https://" + this.#instance + "/worker/change", {
+        return (await request_1.request.post("https://" + this.#instance + "/worker/change", {
             type: "password",
             oldPassword: oldPassword,
             newPassword: newPassword,
@@ -447,7 +467,7 @@ class TurtleClient {
             headers: {
                 Cookie: "connect.sid=" + this.#session,
             },
-        });
+        })).data;
     }
     /**
      * Set the global request handler's proxy. Also affects TurtleClient.get and TurtleClient.post.

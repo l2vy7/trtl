@@ -69,19 +69,22 @@ class TurtleUtils {
      * @param {string} password - The user's password.
      * @param {string} accessCode - The access code. Will be removed at a later date (around December 30th).
      * @returns {Promise} - An Axios request to the /logout endpoint.
+     * @async
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async register(username, password, accessCode) {
-        return await request_1.request.post("https://" + this.#instance + "/worker/register", {
+        return (await request_1.request.post("https://" + this.#instance + "/worker/register", {
             username: username,
             password: password,
             accessCode: accessCode,
-        }, {});
+        }, {})).data;
     }
     /**
-     * **THIS IS IMPORTANT** - DO NOT USE THIS METHOD. This is a stub and will do nothing. Support will be implemented in the future.
+     * Log into a user's account by the username and password, and return the Session ID.
      * @param {string} username - The user's username.
      * @param {string} password - The user's password.
+     * @async
+     * @returns {string} - Returns the session ID.
      */
     async login(username, password) {
         var cook;

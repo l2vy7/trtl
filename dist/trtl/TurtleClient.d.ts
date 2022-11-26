@@ -50,12 +50,12 @@ export declare class TurtleClient {
     logout(): Promise<any>;
     /**
      * Join a specific room, which you can then send messages in or get existing messages from.
-     * @param {string} [name=global] - The name of the room, which defaults to 0room.
+     * @param {string} [name=global] - The name of the room, which defaults to global.
      * @async
      * @returns {Promise} - A promise that must be awaited.
      * @see {@link http://socket.io SocketIO Documentation} for more information about SocketIO.
      */
-    join(room?: string): Promise<void>;
+    join(room?: string): Promise<unknown>;
     /**
      * Send a message in a room.
      * @param {string} message - The content of the message.
@@ -117,6 +117,13 @@ export declare class TurtleClient {
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     blooks(): Promise<any>;
+    /**
+     * Get the available badges.
+     * @async
+     * @returns {Promise} - An Axios request to the /worker/badges endpoint.
+     * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
+     */
+    badges(): Promise<any>;
     /**
      * Get the current instance's configuration.
      * @async
