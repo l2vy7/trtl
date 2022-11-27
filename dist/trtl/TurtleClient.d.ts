@@ -62,7 +62,6 @@ export declare class TurtleClient {
      * @async
      * @returns {void} - Returns nothing.
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
-     * @deprecated WARNING: Disabled for Blacket chat update.
      */
     send(message: string): Promise<void>;
     /**
