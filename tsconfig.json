@@ -13,7 +13,7 @@
     "declarationMap": true,
     "composite": true
   },
-  "include": ["src/*", "src/trtl/*", "src/trtl/util/*", "dist/index.d.ts"],
+  "include": ["src/*", "src/trtl/*", "src/trtl/util/*", "src/trtl/modular/*", "dist/index.d.ts"],
   "typedocOptions": {
     "name": "Trtl",
     "entryPoints": ["src/index.ts"],

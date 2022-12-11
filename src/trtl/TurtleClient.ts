@@ -1,7 +1,33 @@
 import { request } from "./util/request";
 
-import { io, Socket } from "socket.io-client";
 import { EventEmitter } from "events";
+import * as wes from "ws";
+
+function contextRemover__listenOn(type, callback) {
+  // @ts-ignore because "this" is a WebSocket instance.
+  this.addEventListener("message", (msg) => {
+    msg = JSON.parse(msg.data);
+    if (msg.type == type) callback(msg);
+  });
+}
+
+function contextRemover__listenOnce(type, callback) {
+  // @ts-ignore because "this" is a WebSocket instance.
+  this.addEventListener("message", (msg) => {
+    msg = JSON.parse(msg.data);
+    if (msg.type == type) callback(msg);
+  }, {once: true});
+}
+
+function contextRemover__emit(type, data) {
+  var d = JSON.stringify({
+    type: type,
+    data: data,
+  });
+  this.send(d);
+}
+
+var WebSocket = wes.WebSocket;
 
 /**
  * The TurtleClient class.
@@ -13,7 +39,7 @@ import { EventEmitter } from "events";
  */
 export class TurtleClient {
   #session: string;
-  #socket: Socket;
+  #socket: WebSocket;
 
   #room: string;
 
@@ -49,40 +75,45 @@ export class TurtleClient {
     this.events.setMaxListeners(Infinity);
     this.#room = "global";
     this.#session = session;
-    this.#socket = io("https://" + this.#instance, {
-      withCredentials: true,
-      reconnection: true,
-      extraHeaders: {
-        cookie: "connect.sid=" + this.#session,
-        accept: "*/*",
-        "accept-language": "en-US,en;q=0.9",
-        "sec-ch-ua":
-          '"Google Chrome";v="107", "Chromium";v="107", "Not=A?Brand";v="24"',
-        "sec-ch-ua-mobile": "?0",
-        "sec-ch-ua-platform": '"Windows"',
-        "sec-fetch-dest": "empty",
-        "sec-fetch-mode": "cors",
-        "user-agent":
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36",
-      },
+    // @ts-ignore
+    this.#socket = new WebSocket(`wss://${instance}/worker/socket`, {
+        headers: {
+            cookie: "connect.sid=" + this.#session,
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36"
+        },
     });
-    this.#socket.connect();
-    this.#socket.on("error", (e) => {
+
+    // @ts-ignore
+    this.#socket.listenon = contextRemover__listenOn;
+
+    // @ts-ignore
+    this.#socket.listenemit = contextRemover__emit;
+
+    // @ts-ignore
+    this.#socket.addEventListener('error', (e) => {
       this.events.emit("error", e);
     });
-    this.#socket.on("join", (data) => {
+    this.#socket.addEventListener("message", (da) => {
+      this.events.emit("generic", da);
+    });
+    // @ts-ignore
+    this.#socket.listenon.bind(this.#socket)("join", (data) => {
       this.events.emit("join", data);
     });
-    this.#socket.on("leave", (data) => {
+    // @ts-ignore
+    this.#socket.listenon.bind(this.#socket)("leave", (data) => {
       this.events.emit("leave", data);
     });
-    this.#socket.on("chat", (data) => {
+    // @ts-ignore
+    this.#socket.listenon.bind(this.#socket)("chat", (data) => {
       this.events.emit("msg", data);
     });
-    this.#socket.on("connect", () => {
+    // @ts-ignore
+    this.#socket.addEventListener('open', () => {
       this.events.emit("connected");
     });
-    this.#socket.on("disconnect", () => {
+    // @ts-ignore
+    this.#socket.addEventListener('close', () => {
       this.events.emit("disconnected");
     });
   }
@@ -130,9 +161,8 @@ export class TurtleClient {
 
   async wait() {
     return await new Promise((res) => {
-      this.#socket.on("connect", () => {
-        res(this);
-      });
+      //@ts-ignore
+      this.#socket.onopen = res;
     });
   }
 
@@ -143,7 +173,7 @@ export class TurtleClient {
    * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
    */
   async logout() {
-    this.#socket.disconnect();
+    this.#socket.close();
     return (
       await request.get("https://" + this.#instance + "/logout", {
         headers: {
@@ -162,14 +192,13 @@ export class TurtleClient {
    */
   async join(room: string = "global") {
     this.#room = room;
-    var j = this.#socket.emit("join", room);
+    //@ts-ignore
+    var j = this.#socket.listenemit.bind(this.#socket)("join", room);
     return await new Promise((res) => {
-      this.#socket.once("join", () => {
-        this.#socket.emit("info");
-        this.#socket.once("info", (d) => {
-          res(d);
+        //@ts-ignore
+        this.#socket.listenon.bind(this.#socket)("join", (d) => {
+            res(d);
         });
-      });
     });
   }
 
@@ -181,7 +210,8 @@ export class TurtleClient {
    * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
    */
   async send(message: string) {
-    this.#socket.emit("chat", message);
+    // @ts-ignore
+    this.#socket.listenemit.bind(this.#socket)("chat", message);
   }
 
   /**
@@ -366,12 +396,16 @@ export class TurtleClient {
    * @returns {Promise} - An Axios request to the /worker/messages endpoint.
    * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
    */
-  async messages() {
-    var j = this.#socket.emit("join", this.#room);
+  async messages(room = this.#room) {
+    // @ts-ignore
+    var j = this.#socket.listenemit.bind(this.#socket)("join", room);
     return await new Promise((res) => {
-      this.#socket.once("join", () => {
-        this.#socket.emit("info");
-        this.#socket.once("info", (d) => {
+      //@ts-ignore
+      this.#socket.listenon.bind(this.#socket)("join", () => {
+        //@ts-ignore
+        this.#socket.listenemit.bind(this.#socket)("info");
+        //@ts-ignore
+        this.#socket.listenon.bind(this.#socket)("info", (d) => {
           res(d);
         });
       });
@@ -427,7 +461,8 @@ export class TurtleClient {
    * @returns {void} - Returns nothing.
    */
   socketOn(event: string, callback: any) {
-    this.#socket.on(event, callback);
+    // @ts-ignore
+    this.#socket.listenon.bind(this.#socket)(event, callback);
   }
 
   /**
@@ -449,7 +484,8 @@ export class TurtleClient {
    * @returns {void} - Returns nothing.
    */
   socketEmit(event: string, data: any) {
-    this.#socket.emit(event, data);
+    // @ts-ignore
+    this.#socket.listenemit.bind(this.#socket)(event, data);
   }
 
   /**
@@ -539,6 +575,23 @@ export class TurtleClient {
           type: "username",
           username: name,
           password: password,
+        },
+        {
+          headers: {
+            Cookie: "connect.sid=" + this.#session,
+          },
+        }
+      )
+    ).data;
+  }
+
+  async color(newColor: string) {
+    return (
+      await request.post(
+        "https://" + this.#instance + "/worker/change",
+        {
+          type: "color",
+          color: newColor,
         },
         {
           headers: {

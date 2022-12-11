@@ -143,7 +143,7 @@ export declare class TurtleClient {
      * @returns {Promise} - An Axios request to the /worker/messages endpoint.
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
-    messages(): Promise<unknown>;
+    messages(room?: string): Promise<unknown>;
     /**
      * Get detailed information about yourself, or less detailed information about others.
      * @param {string} [name=] - A user's name. Leave blank for yourself, or use a string for others.
@@ -231,6 +231,7 @@ export declare class TurtleClient {
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     username(name: string, password: string): Promise<any>;
+    color(newColor: string): Promise<any>;
     /**
      * Change your account's password.
      * @param {string} oldPassword - The bot's old password.

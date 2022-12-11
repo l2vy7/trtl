@@ -24,7 +24,7 @@
  * 2022
  * acaiberii.win
  *
- * Forks and modification is allowed, but please include this license.
+ * Forks and modification are allowed, but please include this license.
  *
  * Copyright 2022 Acaiberii/L2vy7
  *
@@ -35,4 +35,6 @@
 export { TurtleClient } from "./trtl/TurtleClient";
 export { TurtleContent } from "./trtl/TurtleContent";
 export { TurtleUtils } from './trtl/TurtleUtils';
+export * as Debugging from './trtl/modular/Debugging';
+export * as Middleware from './trtl/util/extend';
 //# sourceMappingURL=index.d.ts.map
