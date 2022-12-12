@@ -41,7 +41,9 @@ function contextRemover__listenOnce(type, callback) {
         msg = JSON.parse(msg.data);
         if (msg.type == type)
             callback(msg);
-    }, { once: true });
+    }, {
+        once: true
+    });
 }
 function contextRemover__emit(type, data) {
     var d = JSON.stringify({
@@ -380,9 +382,9 @@ class TurtleClient {
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async user(name = "") {
-        return (await request_1.request.get(name === ""
-            ? "https://" + this.#instance + "/worker/user"
-            : "https://" + this.#instance + "/worker/user/" + name, {
+        return (await request_1.request.get(name === "" ?
+            "https://" + this.#instance + "/worker/user" :
+            "https://" + this.#instance + "/worker/user/" + name, {
             headers: {
                 Cookie: "connect.sid=" + this.#session,
             },

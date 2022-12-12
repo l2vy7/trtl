@@ -1,8 +1,8 @@
 var exists = (val) =>
-  val !== null && val !== undefined && typeof val !== "undefined";
+	val !== null && val !== undefined && typeof val !== "undefined";
 
 function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
+	return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 /**
@@ -20,15 +20,15 @@ function capitalizeFirstLetter(string) {
  * })
  */
 export function extend(classx, mods) {
-  var proto = classx.prototype;
+	var proto = classx.prototype;
 
-  for (var x of Object.entries(mods)) {
-    if (!exists(proto[x[0]]))
-      classx.prototype[x[0]] = Function(
-        ...x[1][0].split(",").join(", ").split(", "),
-        x[1][1]
-      );
-    else
-      classx.prototype["hook" + capitalizeFirstLetter(x[1][0])](x[0], x[1][1]);
-  }
+	for (var x of Object.entries(mods)) {
+		if (!exists(proto[x[0]]))
+			classx.prototype[x[0]] = Function(
+				...x[1][0].split(",").join(", ").split(", "),
+				x[1][1]
+			);
+		else
+			classx.prototype["hook" + capitalizeFirstLetter(x[1][0])](x[0], x[1][1]);
+	}
 }

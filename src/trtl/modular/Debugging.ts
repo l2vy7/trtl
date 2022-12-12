@@ -1,1 +1,4 @@
-export { request as InternalRequests } from "../util/request";
+export {
+	request as InternalRequests
+}
+from "../util/request";

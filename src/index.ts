@@ -32,8 +32,17 @@
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-export { TurtleClient } from "./trtl/TurtleClient";
-export { TurtleContent } from "./trtl/TurtleContent";
-export { TurtleUtils } from './trtl/TurtleUtils';
+export {
+    TurtleClient
+}
+from "./trtl/TurtleClient";
+export {
+    TurtleContent
+}
+from "./trtl/TurtleContent";
+export {
+    TurtleUtils
+}
+from './trtl/TurtleUtils';
 export * as Debugging from './trtl/modular/Debugging';
 export * as Middleware from './trtl/util/extend';
