@@ -246,7 +246,27 @@ export declare class TurtleClient {
      * Most used for farming boxes.
      * @param {string} type - The type (usually http or https) of the proxy.
      * @param {string} url - The URL of the proxy (excluding https:// or /whatever)
+     * @async
      */
     proxy(type: string, url: string): Promise<void>;
+    /**
+     * Get the ID of a user. Used mainly for TurtleClient.trade.
+     * @param user - The name of the user to get the ID from.
+     * @async
+     */
+    id(user: string): Promise<any>;
+    /**
+     * Trades with a user.
+     * @param id - ID of the user you want to trade to.
+     * @example
+     * await client.trade(await client.id('acai'));
+     * @async
+     */
+    trade(id: string): Promise<void>;
+    /**
+     * Cancels your current trade request.
+     * @async
+     */
+    cancel(): Promise<void>;
 }
 //# sourceMappingURL=TurtleClient.d.ts.map

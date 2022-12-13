@@ -129,6 +129,30 @@ class TurtleClient {
         this.#socket.addEventListener('close', () => {
             this.events.emit("disconnected");
         });
+        // @ts-ignore
+        this.#socket.listenon.bind(this.#socket)("request", (data) => {
+            if (data.error) {
+                this.events.emit("error", data.reason);
+                return;
+            }
+            if (data.data) {
+                if (data.data.id) {
+                    this.events.emit("request", {
+                        id: data.data,
+                        user: data.user
+                    });
+                    return;
+                }
+                if (data.data.cancelled) {
+                    this.events.emit("cancelled");
+                    return;
+                }
+                if (data.data.declined) {
+                    this.events.emit("declined");
+                    return;
+                }
+            }
+        });
     }
     /**
      * Hook code after a function is called. Great for plugins and middlewares.
@@ -547,9 +571,37 @@ class TurtleClient {
      * Most used for farming boxes.
      * @param {string} type - The type (usually http or https) of the proxy.
      * @param {string} url - The URL of the proxy (excluding https:// or /whatever)
+     * @async
      */
     async proxy(type, url) {
         return await request_1.request.proxy(type, url);
+    }
+    /**
+     * Get the ID of a user. Used mainly for TurtleClient.trade.
+     * @param user - The name of the user to get the ID from.
+     * @async
+     */
+    async id(user) {
+        return (await this.user(user)).user.id.toString();
+    }
+    /**
+     * Trades with a user.
+     * @param id - ID of the user you want to trade to.
+     * @example
+     * await client.trade(await client.id('acai'));
+     * @async
+     */
+    async trade(id) {
+        // @ts-ignore
+        this.#socket.listenemit('request', id);
+    }
+    /**
+     * Cancels your current trade request.
+     * @async
+     */
+    async cancel() {
+        // @ts-ignore
+        this.#socket.listenemit('cancel');
     }
 }
 exports.TurtleClient = TurtleClient;
