@@ -11,16 +11,19 @@ const request_1 = require("./util/request");
  */
 class TurtleContent {
     #instance;
+    #protocol;
     /**
      * Construct the TurtleContent class.
      * @constructor
-     * @param {string} [instance=v2.blacket.org] - The instance Host Name: For example, "v2.blacket.org".
+     * @param {string} [instance=blacket.org] - The instance Host Name: For example, "blacket.org".
+     * @param {string} [secure=true] - If the connection should be made securely.
      * @returns {TurtleContent} - The TurtleContent class.
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      * @see {@link https://trtl.acaiberii.win/docs/ Trtl Documentation} for more information about Trtl.
      */
-    constructor(instance = "v2.blacket.org") {
+    constructor(instance = "blacket.org", secure = true) {
         this.#instance = instance;
+        this.#protocol = secure ? "https://" : "http://";
     }
     /**
      * Hook code after a function is called. Great for plugins and middlewares.
@@ -67,7 +70,7 @@ class TurtleContent {
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async getBlook(name) {
-        return request_1.request.stream("https://" + this.#instance + "/content/blooks/" + name + ".png", {});
+        return request_1.request.stream(this.#protocol + this.#instance + "/content/blooks/" + name + ".png", {});
     }
     /**
      * Get the image of a banner by a name. Does not require a Session ID for authentication.
@@ -77,7 +80,7 @@ class TurtleContent {
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async getBanner(name) {
-        return request_1.request.stream("https://" + this.#instance + "/content/banners/" + name + ".png", {});
+        return request_1.request.stream(this.#protocol + this.#instance + "/content/banners/" + name + ".png", {});
     }
     /**
      * Get a generic image (such as levelStar.png). Does not require a Session ID for authentication.
@@ -87,7 +90,7 @@ class TurtleContent {
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async getGeneric(name) {
-        return request_1.request.stream("https://" + this.#instance + "/content/" + name + ".png", {});
+        return request_1.request.stream(this.#protocol + this.#instance + "/content/" + name + ".png", {});
     }
     /**
      * Get a generic image from /images/ (such as images/blacketImageRainbow.gif). Does not require a Session ID for authentication.
@@ -98,7 +101,7 @@ class TurtleContent {
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     async getGenericImages(name, ext = "png") {
-        return request_1.request.stream("https://" + this.#instance + "/images/" + name + "." + ext, {});
+        return request_1.request.stream(this.#protocol + this.#instance + "/images/" + name + "." + ext, {});
     }
     /**
      * Get a stream (preferably an image stream) of a URL.

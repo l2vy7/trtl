@@ -64,19 +64,25 @@ class TurtleUtils {
         this.#instance = instance;
     }
     /**
-     * Register for a Blacket account.
+     * Register for a Blacket account. This does require the form fields to be filled.
      * @param {string} username - The user's username.
      * @param {string} password - The user's password.
-     * @param {string} accessCode - The access code. Will be removed at a later date (around December 30th).
+     * @param {string} age - The user's age (part of form).
+     * @param {string} discord - The user's discord (part of signup form).
+     * @param {string} playReason - The user's reason for registering (part of form).
      * @returns {Promise} - An Axios request to the /logout endpoint.
      * @async
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
-    async register(username, password, accessCode) {
+    async register(username, password, age, discord, playReason) {
         return (await request_1.request.post("https://" + this.#instance + "/worker/register", {
             username: username,
             password: password,
-            accessCode: accessCode,
+            form: {
+                age: age,
+                discord: discord,
+                body: playReason
+            }
         }, {})).data;
     }
     /**

@@ -1,6 +1,4 @@
-<h2>Development succeeded by @VillainsRule4000/@LordDeath01 and @qaiik.</h2>
-<h3>The foundation is done for those who want to develop it. You just need to know basic TypeScript</h3>
-<h3>Goodbye. -acai</h3>
+<h2>Now maintained by qaiik (12/20/22)</h2>
 <div align="center">
     <img width="25%"
         src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/google/80/turtle_1f422.png">
@@ -66,4 +64,4 @@
 <h5><a href="/LOVE.md">hi</a></h5>
 <a href="https://trtl.acaiberii.win/">trtl@acaiberii.win</a>
 
-<h1>As proven in Betastar, making bots with malicious purposes can result in a ban. Create wisely.</h1>
+<h1>As proven in Betastar, making bots with malicious purposes can result in a ban. Create wisely. Even boths that don't have malicious intent may sometimes be muted or banned. The creators of trtl are in no way responsible for what happens because of your bot.</h1>

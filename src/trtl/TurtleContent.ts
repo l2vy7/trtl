@@ -11,17 +11,19 @@ import {
  */
 export class TurtleContent {
     #instance: string;
-
+    #protocol: string;
     /**
      * Construct the TurtleContent class.
      * @constructor
-     * @param {string} [instance=v2.blacket.org] - The instance Host Name: For example, "v2.blacket.org".
+     * @param {string} [instance=blacket.org] - The instance Host Name: For example, "blacket.org".
+     * @param {string} [secure=true] - If the connection should be made securely.
      * @returns {TurtleContent} - The TurtleContent class.
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      * @see {@link https://trtl.acaiberii.win/docs/ Trtl Documentation} for more information about Trtl.
      */
-    constructor(instance: string = "v2.blacket.org") {
+    constructor(instance: string = "blacket.org", secure: boolean = true) {
         this.#instance = instance;
+        this.#protocol = secure ? "https://" : "http://";
     }
 
     /**
@@ -75,7 +77,7 @@ export class TurtleContent {
      */
     async getBlook(name: string) {
         return request.stream(
-            "https://" + this.#instance + "/content/blooks/" + name + ".png", {}
+            this.#protocol + this.#instance + "/content/blooks/" + name + ".png", {}
         );
     }
 
@@ -88,7 +90,7 @@ export class TurtleContent {
      */
     async getBanner(name: string) {
         return request.stream(
-            "https://" + this.#instance + "/content/banners/" + name + ".png", {}
+            this.#protocol + this.#instance + "/content/banners/" + name + ".png", {}
         );
     }
 
@@ -101,7 +103,7 @@ export class TurtleContent {
      */
     async getGeneric(name: string) {
         return request.stream(
-            "https://" + this.#instance + "/content/" + name + ".png", {}
+            this.#protocol + this.#instance + "/content/" + name + ".png", {}
         );
     }
 
@@ -115,7 +117,7 @@ export class TurtleContent {
      */
     async getGenericImages(name: string, ext: string = "png") {
         return request.stream(
-            "https://" + this.#instance + "/images/" + name + "." + ext, {}
+            this.#protocol + this.#instance + "/images/" + name + "." + ext, {}
         );
     }
 

@@ -1,11 +1,11 @@
 # Credits to
-## Qaiik - https://github.com/qaiik
-An extremely nice mentor. Thank you for helping me every step of the way, qaiik!
+## acai
+Created trtl originally and is just extremely nice.
 ## VillainsRule - https://github.com/VillainsRule4000
-Made Trtl-Migrate, and is a very nice person overall.
+Made Trtl-Migrate so trtl is very accessible.
 ## Zastix - https://github.com/notzastix
 Original developer of Betastar.js, which inspired me to make this project.
 ## Xotic - https://github.com/XOTlC
-Though qaiik and I were recently removed from the dev team since he wanted to work alone, thank you for being a funny guy and helping me fix some problems!
+Though me and acai were recently removed from the dev team since he wanted to work alone, thank you for being a funny guy and helping me fix some problems!
 
 ![Betastar.js + Trtl](/assets/img/hi.png)

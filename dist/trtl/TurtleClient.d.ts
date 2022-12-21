@@ -5,7 +5,7 @@ import { EventEmitter } from "events";
  * @type {TurtleClient}
  * @class
  * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
- * @see {@link http://socket.io SocketIO Documentation} for more information about SocketIO.
+ 
  * @see {@link https://trtl.acaiberii.win/docs/ Trtl Documentation} for more information about Trtl.
  */
 export declare class TurtleClient {
@@ -20,14 +20,15 @@ export declare class TurtleClient {
      * Construct the Turtle Client.
      * @constructor
      * @param {string} session - The Session ID, used to log in to the instance.
-     * @param {string} [instance=v2.blacket.org] - The instance Host Name: For example, "v2.blacket.org".
+     * @param {string} [instance=blacket.org] - The instance Host Name: For example, "blacket.org".
+     * @param {boolean} [secure=true] - Set to false if the instance is not secure.
      * @returns {TurtleClient} - The client.
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
-     * @see {@link http://socket.io SocketIO Documentation} for more information about SocketIO.
+     
      * @see {@link https://trtl.acaiberii.win/docs/ Trtl Documentation} for more information about Trtl.
      *
      */
-    constructor(session: string, instance?: string, proxy?: string);
+    constructor(session: string, instance?: string, proxy?: string, secure?: boolean);
     /**
      * Hook code after a function is called. Great for plugins and middlewares.
      * @param {string} method - The name of the method in the class.
@@ -53,7 +54,7 @@ export declare class TurtleClient {
      * @param {string} [name=global] - The name of the room, which defaults to global.
      * @async
      * @returns {Promise} - A promise that must be awaited.
-     * @see {@link http://socket.io SocketIO Documentation} for more information about SocketIO.
+     
      */
     join(room?: string): Promise<unknown>;
     /**
@@ -67,18 +68,18 @@ export declare class TurtleClient {
     /**
      * Claim daily tokens.
      * @async
-     * @returns {Promise} - An Axios request to the /worker/claim endpoint.
+     * @returns {Promise} - Response of /worker/claim endpoint as json.
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
     claim(): Promise<any>;
     /**
      * Open a box (or pack).
-     * @param {string} name - The name of the box (or pack) to open.
+     * @param {string} pack - The name of the box (or pack) to open.
      * @async
      * @returns {Promise} - An Axios request to the /worker/open endpoint.
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      */
-    open(name: string): Promise<any>;
+    open(pack: string): Promise<any>;
     /**
      * Sell a blook or multiple blooks
      * @param {string} name - The name of the blook.
@@ -161,7 +162,6 @@ export declare class TurtleClient {
      * Add a listener for a particular event from the class's EventEmitter (client.events).
      * @param {string} event - The event's name.
      * @param {any} callback - The callback that is called when the event is received.
-     * @see {@link http://socket.io SocketIO Documentation} for more information about SocketIO.
      * @return {void} - Returns nothing.
      */
     on(event: string, callback: any): void;
@@ -169,7 +169,6 @@ export declare class TurtleClient {
      * Add a listener for a particular event from the Blacket socket.
      * @param {string} event - The event's name.
      * @param {any} callback - The callback that is called when the event is received.
-     * @see {@link http://socket.io SocketIO Documentation} for more information about SocketIO.
      * @returns {void} - Returns nothing.
      */
     socketOn(event: string, callback: any): void;
@@ -185,7 +184,7 @@ export declare class TurtleClient {
      * Emit an event from the Blacket socket.
      * @param {string} event - The event's name.
      * @param {any} data - The event's data.
-     * @see {@link http://socket.io SocketIO Documentation} for more information about SocketIO.
+     
      * @returns {void} - Returns nothing.
      */
     socketEmit(event: string, data: any): void;

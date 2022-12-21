@@ -1,13 +1,13 @@
 {
-  "name": "blacket-turtle",
-  "version": "0.3.4",
+  "name": "blacket-trtl",
+  "version": "0.3.5",
   "description": "Trtl: The only Blacket V2 automation library you'll ever need.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "publish": "npm publish --access public"
   },
   "keywords": [],
-  "author": "acaiberii",
+  "author": "qaiik",
   "license": "ISC",
   "publicConfig": {
     "registry": "https://registry.npmjs.org/",
@@ -16,6 +16,7 @@
   "dependencies": {
     "@types/node": "^18.0.6",
     "axios": "^1.1.3",
+    "https-proxy-agent": "^5.0.1",
     "jsdoc": "^3.6.11",
     "prompt": "^1.3.0",
     "readline-sync": "^1.4.10",

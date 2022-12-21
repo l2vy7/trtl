@@ -40,7 +40,7 @@ var WebSocket = wes.WebSocket;
  * @type {TurtleClient}
  * @class
  * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
- * @see {@link http://socket.io SocketIO Documentation} for more information about SocketIO.
+ 
  * @see {@link https://trtl.acaiberii.win/docs/ Trtl Documentation} for more information about Trtl.
  */
 export class TurtleClient {
@@ -50,6 +50,8 @@ export class TurtleClient {
 	#room: string;
 
 	#instance: string;
+	#protocol: string;
+	#wsProtocol: string;
 
 	/**
 	 * The client's EventEmitter.
@@ -62,19 +64,24 @@ export class TurtleClient {
 	 * Construct the Turtle Client.
 	 * @constructor
 	 * @param {string} session - The Session ID, used to log in to the instance.
-	 * @param {string} [instance=v2.blacket.org] - The instance Host Name: For example, "v2.blacket.org".
+	 * @param {string} [instance=blacket.org] - The instance Host Name: For example, "blacket.org".
+	 * @param {boolean} [secure=true] - Set to false if the instance is not secure.
 	 * @returns {TurtleClient} - The client.
 	 * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
-	 * @see {@link http://socket.io SocketIO Documentation} for more information about SocketIO.
+	 
 	 * @see {@link https://trtl.acaiberii.win/docs/ Trtl Documentation} for more information about Trtl.
 	 *
 	 */
 	constructor(
 		session: string,
-		instance: string = "v2.blacket.org",
-		proxy: string = ""
+		instance: string = "blacket.org",
+		proxy: string = "",
+		secure: boolean = true
 	) {
 		this.#instance = instance;
+		this.#protocol = secure ? "https://" : "http://";
+		this.#wsProtocol = secure ? "wss://" : "ws://"
+		
 		this.events = new EventEmitter({
 			captureRejections: true,
 		});
@@ -82,7 +89,7 @@ export class TurtleClient {
 		this.#room = "global";
 		this.#session = session;
 		// @ts-ignore
-		this.#socket = new WebSocket(`wss://${instance}/worker/socket`, {
+		this.#socket = new WebSocket(`${this.#wsProtocol}${instance}/worker/socket`, {
 			headers: {
 				cookie: "connect.sid=" + this.#session,
 				"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36"
@@ -208,7 +215,7 @@ export class TurtleClient {
 	async logout() {
 		this.#socket.close();
 		return (
-			await request.get("https://" + this.#instance + "/logout", {
+			await request.get(this.#protocol + this.#instance + "/logout", {
 				headers: {
 					Cookie: "connect.sid=" + this.#session,
 				},
@@ -221,7 +228,7 @@ export class TurtleClient {
 	 * @param {string} [name=global] - The name of the room, which defaults to global.
 	 * @async
 	 * @returns {Promise} - A promise that must be awaited.
-	 * @see {@link http://socket.io SocketIO Documentation} for more information about SocketIO.
+	 
 	 */
 	async join(room: string = "global") {
 		this.#room = room;
@@ -250,12 +257,12 @@ export class TurtleClient {
 	/**
 	 * Claim daily tokens.
 	 * @async
-	 * @returns {Promise} - An Axios request to the /worker/claim endpoint.
+	 * @returns {Promise} - Response of /worker/claim endpoint as json.
 	 * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
 	 */
 	async claim() {
 		return (
-			await request.get("https://" + this.#instance + "/worker/claim", {
+			await request.get(this.#protocol + this.#instance + "/worker/claim", {
 				headers: {
 					Cookie: "connect.sid=" + this.#session,
 				},
@@ -265,16 +272,16 @@ export class TurtleClient {
 
 	/**
 	 * Open a box (or pack).
-	 * @param {string} name - The name of the box (or pack) to open.
+	 * @param {string} pack - The name of the box (or pack) to open.
 	 * @async
 	 * @returns {Promise} - An Axios request to the /worker/open endpoint.
 	 * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
 	 */
-	async open(name: string) {
+	async open(pack: string) {
 		return (
 			await request.post(
-				"https://" + this.#instance + "/worker/open", {
-					pack: name,
+				this.#protocol + this.#instance + "/worker/open", {
+					pack: pack,
 				}, {
 					headers: {
 						Cookie: "connect.sid=" + this.#session,
@@ -295,7 +302,7 @@ export class TurtleClient {
 	async sell(name: string, quantity: number = 0) {
 		return (
 			await request.post(
-				"https://" + this.#instance + "/worker/sell", {
+				this.#protocol + this.#instance + "/worker/sell", {
 					blook: name,
 					quantity: quantity.toString(),
 				}, {
@@ -315,7 +322,7 @@ export class TurtleClient {
 	 */
 	async news() {
 		return (
-			await request.get("https://" + this.#instance + "/worker/news", {
+			await request.get(this.#protocol + this.#instance + "/worker/news", {
 				headers: {
 					Cookie: "connect.sid=" + this.#session,
 				},
@@ -331,7 +338,7 @@ export class TurtleClient {
 	 */
 	async packs() {
 		return (
-			await request.get("https://" + this.#instance + "/worker/packs", {
+			await request.get(this.#protocol + this.#instance + "/worker/packs", {
 				headers: {
 					Cookie: "connect.sid=" + this.#session,
 				},
@@ -347,7 +354,7 @@ export class TurtleClient {
 	 */
 	async rarities() {
 		return (
-			await request.get("https://" + this.#instance + "/worker/rarities", {
+			await request.get(this.#protocol + this.#instance + "/worker/rarities", {
 				headers: {
 					Cookie: "connect.sid=" + this.#session,
 				},
@@ -363,7 +370,7 @@ export class TurtleClient {
 	 */
 	async blooks() {
 		return (
-			await request.get("https://" + this.#instance + "/worker/blooks", {
+			await request.get(this.#protocol + this.#instance + "/worker/blooks", {
 				headers: {
 					Cookie: "connect.sid=" + this.#session,
 				},
@@ -379,7 +386,7 @@ export class TurtleClient {
 	 */
 	async badges() {
 		return (
-			await request.get("https://" + this.#instance + "/worker/badges", {
+			await request.get(this.#protocol + this.#instance + "/worker/badges", {
 				headers: {
 					Cookie: "connect.sid=" + this.#session,
 				},
@@ -395,7 +402,7 @@ export class TurtleClient {
 	 */
 	async config() {
 		return (
-			await request.get("https://" + this.#instance + "/worker/config", {
+			await request.get(this.#protocol + this.#instance + "/worker/config", {
 				headers: {
 					Cookie: "connect.sid=" + this.#session,
 				},
@@ -411,7 +418,7 @@ export class TurtleClient {
 	 */
 	async leaderboard() {
 		return (
-			await request.get("https://" + this.#instance + "/worker/leaderboard", {
+			await request.get(this.#protocol + this.#instance + "/worker/leaderboard", {
 				headers: {
 					Cookie: "connect.sid=" + this.#session,
 				},
@@ -452,8 +459,8 @@ export class TurtleClient {
 		return (
 			await request.get(
 				name === "" ?
-				"https://" + this.#instance + "/worker/user" :
-				"https://" + this.#instance + "/worker/user/" + name, {
+				this.#protocol + this.#instance + "/worker/user" :
+				this.#protocol + this.#instance + "/worker/user/" + name, {
 					headers: {
 						Cookie: "connect.sid=" + this.#session,
 					},
@@ -474,7 +481,6 @@ export class TurtleClient {
 	 * Add a listener for a particular event from the class's EventEmitter (client.events).
 	 * @param {string} event - The event's name.
 	 * @param {any} callback - The callback that is called when the event is received.
-	 * @see {@link http://socket.io SocketIO Documentation} for more information about SocketIO.
 	 * @return {void} - Returns nothing.
 	 */
 	on(event: string, callback: any) {
@@ -485,7 +491,6 @@ export class TurtleClient {
 	 * Add a listener for a particular event from the Blacket socket.
 	 * @param {string} event - The event's name.
 	 * @param {any} callback - The callback that is called when the event is received.
-	 * @see {@link http://socket.io SocketIO Documentation} for more information about SocketIO.
 	 * @returns {void} - Returns nothing.
 	 */
 	socketOn(event: string, callback: any) {
@@ -508,7 +513,7 @@ export class TurtleClient {
 	 * Emit an event from the Blacket socket.
 	 * @param {string} event - The event's name.
 	 * @param {any} data - The event's data.
-	 * @see {@link http://socket.io SocketIO Documentation} for more information about SocketIO.
+	 
 	 * @returns {void} - Returns nothing.
 	 */
 	socketEmit(event: string, data: any) {
@@ -549,7 +554,7 @@ export class TurtleClient {
 	async banner(name: string) {
 		return (
 			await request.post(
-				"https://" + this.#instance + "/worker/set", {
+				this.#protocol + this.#instance + "/worker/set", {
 					type: "banner",
 					banner: name,
 				}, {
@@ -571,7 +576,7 @@ export class TurtleClient {
 	async blook(name: string) {
 		return (
 			await request.post(
-				"https://" + this.#instance + "/worker/set", {
+				this.#protocol + this.#instance + "/worker/set", {
 					type: "blook",
 					blook: name,
 				}, {
@@ -594,7 +599,7 @@ export class TurtleClient {
 	async username(name: string, password: string) {
 		return (
 			await request.post(
-				"https://" + this.#instance + "/worker/change", {
+				this.#protocol + this.#instance + "/worker/change", {
 					type: "username",
 					username: name,
 					password: password,
@@ -610,7 +615,7 @@ export class TurtleClient {
 	async color(newColor: string) {
 		return (
 			await request.post(
-				"https://" + this.#instance + "/worker/change", {
+				this.#protocol + this.#instance + "/worker/change", {
 					type: "color",
 					color: newColor,
 				}, {
@@ -633,7 +638,7 @@ export class TurtleClient {
 	async password(oldPassword: string, newPassword: string) {
 		return (
 			await request.post(
-				"https://" + this.#instance + "/worker/change", {
+				this.#protocol + this.#instance + "/worker/change", {
 					type: "password",
 					oldPassword: oldPassword,
 					newPassword: newPassword,

@@ -10,12 +10,13 @@ export declare class TurtleContent {
     /**
      * Construct the TurtleContent class.
      * @constructor
-     * @param {string} [instance=v2.blacket.org] - The instance Host Name: For example, "v2.blacket.org".
+     * @param {string} [instance=blacket.org] - The instance Host Name: For example, "blacket.org".
+     * @param {string} [secure=true] - If the connection should be made securely.
      * @returns {TurtleContent} - The TurtleContent class.
      * @see {@link http://axios-http.com Axios Documentation} for more information about Axios.
      * @see {@link https://trtl.acaiberii.win/docs/ Trtl Documentation} for more information about Trtl.
      */
-    constructor(instance?: string);
+    constructor(instance?: string, secure?: boolean);
     /**
      * Hook code after a function is called. Great for plugins and middlewares.
      * @param {string} method - The name of the method in the class.

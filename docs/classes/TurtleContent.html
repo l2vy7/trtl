@@ -28,7 +28,7 @@
 <ul class="tsd-hierarchy">
 <li><span class="target">TurtleContent</span></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/l2vy7/trtl/blob/1adbb12/src/trtl/TurtleContent.ts#L12">trtl/TurtleContent.ts:12</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/qaiik/trtlreborn/blob/6cff294/src/trtl/TurtleContent.ts#L12">trtl/TurtleContent.ts:12</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -41,6 +41,7 @@
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading">Properties</h3>
 <div class="tsd-index-list"><a href="TurtleContent.html#_instance" class="tsd-index-link tsd-kind-property tsd-parent-kind-class tsd-is-private"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><rect fill="var(--color-icon-background)" stroke="#FF984D" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="12" id="icon-1024-path"></rect><path d="M9.354 16V7.24H12.174C12.99 7.24 13.638 7.476 14.118 7.948C14.606 8.412 14.85 9.036 14.85 9.82C14.85 10.604 14.606 11.232 14.118 11.704C13.638 12.168 12.99 12.4 12.174 12.4H10.434V16H9.354ZM10.434 11.428H12.174C12.646 11.428 13.022 11.284 13.302 10.996C13.59 10.7 13.734 10.308 13.734 9.82C13.734 9.324 13.59 8.932 13.302 8.644C13.022 8.356 12.646 8.212 12.174 8.212H10.434V11.428Z" fill="var(--color-text)" id="icon-1024-text"></path></svg><span>#instance</span></a>
+<a href="TurtleContent.html#_protocol" class="tsd-index-link tsd-kind-property tsd-parent-kind-class tsd-is-private"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>#protocol</span></a>
 </div></section>
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading">Methods</h3>
@@ -57,7 +58,7 @@
 <section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class"><a id="constructor" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>constructor</span><a href="#constructor" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" id="icon-anchor-a"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" id="icon-anchor-b"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" id="icon-anchor-c"></path></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-<li class="tsd-signature tsd-anchor-link" id="constructor.new_TurtleContent">new <wbr/>Turtle<wbr/>Content<span class="tsd-signature-symbol">(</span>instance<span class="tsd-signature-symbol">??: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="TurtleContent.html" class="tsd-signature-type" data-tsd-kind="Class">TurtleContent</a><a href="#constructor.new_TurtleContent" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="constructor.new_TurtleContent">new <wbr/>Turtle<wbr/>Content<span class="tsd-signature-symbol">(</span>instance<span class="tsd-signature-symbol">??: </span><span class="tsd-signature-type">string</span>, secure<span class="tsd-signature-symbol">??: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="TurtleContent.html" class="tsd-signature-type" data-tsd-kind="Class">TurtleContent</a><a href="#constructor.new_TurtleContent" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Construct the TurtleContent class.</p>
 
@@ -74,19 +75,28 @@
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><code class="tsd-tag ts-flagOptional">Optional</code> instance: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;v2.blacket.org&quot;</span></h5>
-<div class="tsd-comment tsd-typography"><p>The instance Host Name: For example, &quot;v2.blacket.org&quot;.</p>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> instance: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;blacket.org&quot;</span></h5>
+<div class="tsd-comment tsd-typography"><p>The instance Host Name: For example, &quot;blacket.org&quot;.</p>
+</div></li>
+<li>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> secure: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></h5>
+<div class="tsd-comment tsd-typography"><p>If the connection should be made securely.</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="TurtleContent.html" class="tsd-signature-type" data-tsd-kind="Class">TurtleContent</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/l2vy7/trtl/blob/1adbb12/src/trtl/TurtleContent.ts#L23">trtl/TurtleContent.ts:23</a></li></ul></aside></li></ul></section></section>
+<li>Defined in <a href="https://github.com/qaiik/trtlreborn/blob/6cff294/src/trtl/TurtleContent.ts#L24">trtl/TurtleContent.ts:24</a></li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Properties</h2>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private"><a id="_instance" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>#instance</span><a href="#_instance" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">#instance<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/l2vy7/trtl/blob/1adbb12/src/trtl/TurtleContent.ts#L13">trtl/TurtleContent.ts:13</a></li></ul></aside></section></section>
+<li>Defined in <a href="https://github.com/qaiik/trtlreborn/blob/6cff294/src/trtl/TurtleContent.ts#L13">trtl/TurtleContent.ts:13</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private"><a id="_protocol" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>#protocol</span><a href="#_protocol" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<div class="tsd-signature">#protocol<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/qaiik/trtlreborn/blob/6cff294/src/trtl/TurtleContent.ts#L14">trtl/TurtleContent.ts:14</a></li></ul></aside></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Methods</h2>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="getBanner" class="tsd-anchor"></a>
@@ -112,7 +122,7 @@
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/l2vy7/trtl/blob/1adbb12/src/trtl/TurtleContent.ts#L89">trtl/TurtleContent.ts:89</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/qaiik/trtlreborn/blob/6cff294/src/trtl/TurtleContent.ts#L91">trtl/TurtleContent.ts:91</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="getBlook" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>get<wbr/>Blook</span><a href="#getBlook" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -136,7 +146,7 @@
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/l2vy7/trtl/blob/1adbb12/src/trtl/TurtleContent.ts#L76">trtl/TurtleContent.ts:76</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/qaiik/trtlreborn/blob/6cff294/src/trtl/TurtleContent.ts#L78">trtl/TurtleContent.ts:78</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="getGeneric" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>get<wbr/>Generic</span><a href="#getGeneric" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -160,7 +170,7 @@
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/l2vy7/trtl/blob/1adbb12/src/trtl/TurtleContent.ts#L102">trtl/TurtleContent.ts:102</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/qaiik/trtlreborn/blob/6cff294/src/trtl/TurtleContent.ts#L104">trtl/TurtleContent.ts:104</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="getGenericImages" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>get<wbr/>Generic<wbr/>Images</span><a href="#getGenericImages" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -188,7 +198,7 @@
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/l2vy7/trtl/blob/1adbb12/src/trtl/TurtleContent.ts#L116">trtl/TurtleContent.ts:116</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/qaiik/trtlreborn/blob/6cff294/src/trtl/TurtleContent.ts#L118">trtl/TurtleContent.ts:118</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="getStream" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>get<wbr/>Stream</span><a href="#getStream" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -214,7 +224,7 @@
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/l2vy7/trtl/blob/1adbb12/src/trtl/TurtleContent.ts#L130">trtl/TurtleContent.ts:130</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/qaiik/trtlreborn/blob/6cff294/src/trtl/TurtleContent.ts#L132">trtl/TurtleContent.ts:132</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="hookAfter" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>hook<wbr/>After</span><a href="#hookAfter" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -235,7 +245,7 @@
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/l2vy7/trtl/blob/1adbb12/src/trtl/TurtleContent.ts#L32">trtl/TurtleContent.ts:32</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/qaiik/trtlreborn/blob/6cff294/src/trtl/TurtleContent.ts#L34">trtl/TurtleContent.ts:34</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="hookBefore" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>hook<wbr/>Before</span><a href="#hookBefore" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -256,7 +266,7 @@
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/l2vy7/trtl/blob/1adbb12/src/trtl/TurtleContent.ts#L56">trtl/TurtleContent.ts:56</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/qaiik/trtlreborn/blob/6cff294/src/trtl/TurtleContent.ts#L58">trtl/TurtleContent.ts:58</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 <div class="tsd-navigation settings">
 <details class="tsd-index-accordion"><summary class="tsd-accordion-summary">
@@ -285,6 +295,7 @@
 <ul>
 <li class="tsd-kind-constructor tsd-parent-kind-class"><a href="TurtleContent.html#constructor" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-512-path"></use><use href="#icon-512-text"></use></svg>constructor</a></li>
 <li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="TurtleContent.html#_instance" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>#instance</a></li>
+<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="TurtleContent.html#_protocol" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>#protocol</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class"><a href="TurtleContent.html#getBanner" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>get<wbr/>Banner</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class"><a href="TurtleContent.html#getBlook" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>get<wbr/>Blook</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class"><a href="TurtleContent.html#getGeneric" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>get<wbr/>Generic</a></li>
