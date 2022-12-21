@@ -1,4 +1,3 @@
-<h1>Temporarily discontinued. I no longer have enough time to work on this due to school and will now take a break. Thank you for being interested in Trtl, and have a nice day.</h1>
 <h2>Development succeeded by @VillainsRule4000/@LordDeath01 and @qaiik.</h2>
 <h3>The foundation is done for those who want to develop it. You just need to know basic TypeScript</h3>
 <h3>Goodbye. -acai</h3>
