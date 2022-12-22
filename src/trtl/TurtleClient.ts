@@ -46,7 +46,7 @@ var WebSocket = wes.WebSocket;
 export class TurtleClient {
 	#session: string;
 	#socket: WebSocket;
-
+	#trade: object;
 	#room: string;
 
 	#instance: string;
@@ -81,6 +81,7 @@ export class TurtleClient {
 		this.#instance = instance;
 		this.#protocol = secure ? "https://" : "http://";
 		this.#wsProtocol = secure ? "wss://" : "ws://"
+		this.#trade = {};
 		
 		this.events = new EventEmitter({
 			captureRejections: true,
@@ -95,6 +96,7 @@ export class TurtleClient {
 				"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36"
 			},
 		});
+
 
 		// @ts-ignore
 		this.#socket.listenon = contextRemover__listenOn;
@@ -469,6 +471,7 @@ export class TurtleClient {
 		).data;
 	}
 
+
 	/**
 	 * Get the client's session ID. Please do not share this with others: this will allow others to access your account.
 	 * @returns {string} - The session ID.
@@ -672,23 +675,89 @@ export class TurtleClient {
 	}
 
 	/**
-	 * Trades with a user.
-	 * @param id - ID of the user you want to trade to.
+	 * Trades with a user. Should be wrapped in a .on("connected"). Can be awaited.
+	 * @param name - Name of the user you want to trade with
 	 * @example
-	 * await client.trade(await client.id('acai'));
+	 * client.trade('acai');
 	 * @async
 	 */
-	async trade(id: string) {
+	async trade(name: string) {
 		// @ts-ignore
-		this.#socket.listenemit('request', id);
+		this.#socket.listenemit('request', await this.id(name));
+		return true;
+	}
+
+
+	/**
+	 * Fires when the other user updates their blooks.
+	 * @param callback The callback to be called when the other user updates their blooks
+	 */
+	onBlookChange(callback: any) {
+		// @ts-ignore
+		this.#socket.listenon('trade', callback);
 	}
 
 	/**
 	 * Cancels your current trade request.
-	 * @async
 	 */
-	async cancel() {
+	cancel() {
 		// @ts-ignore
 		this.#socket.listenemit('cancel');
+	}
+
+	/**
+	 * Waits for a trade to be accepted or declined. Returns true if the trade was accepted and false if the trade was declined.
+	 * @async
+	 */
+	waitTrade() {
+		return new Promise<boolean>((resolve: Function, reject: Function) => {
+			// @ts-ignore
+			this.#socket.listenon('request', (msg) => {
+				if (msg.data?.declined) {
+					resolve(false);
+				}
+			})
+
+
+			// @ts-ignore
+			this.#socket.listenon("trade", (msg) => {
+				resolve(true);
+			})
+		})
+	}
+
+	/**
+	 * Adds one or more of a blook to a trade
+	 * @param name - The blook to add to the trade
+	 * @param {number} [count=1] - The number of blooks to trade. Default one.
+	 */
+	tradeBlook(name: string, count: number = 1) {
+		this.#trade[name] = count;
+		// @ts-ignore
+		this.#socket.listenemit("blooks", this.#trade)
+	}
+
+
+	/**
+	 * Removes a blook from the trade.
+	 * @param name The name of the blook to remove.
+	 */
+	removeBlook(name: string) {
+		delete this.#trade[name];
+		// @ts-ignore
+		this.#socket.listenemit("blooks", this.#trade)
+	}
+
+	/**
+	 * Declines a trade while inside.
+	 */
+	declineTrade() {
+		// @ts-ignore
+		this.#socket.listenemit("decline", "trade");
+	}
+
+	acceptTrade() {
+		// @ts-ignore
+		this.#socket.listenemit("accept", "trade");
 	}
 }

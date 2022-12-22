@@ -255,17 +255,42 @@ export declare class TurtleClient {
      */
     id(user: string): Promise<any>;
     /**
-     * Trades with a user.
-     * @param id - ID of the user you want to trade to.
+     * Trades with a user. Should be wrapped in a .on("connected"). Can be awaited.
+     * @param name - Name of the user you want to trade with
      * @example
-     * await client.trade(await client.id('acai'));
+     * client.trade('acai');
      * @async
      */
-    trade(id: string): Promise<void>;
+    trade(name: string): Promise<boolean>;
+    /**
+     * Fires when the other user updates their blooks.
+     * @param callback The callback to be called when the other user updates their blooks
+     */
+    onBlookChange(callback: any): void;
     /**
      * Cancels your current trade request.
+     */
+    cancel(): void;
+    /**
+     * Waits for a trade to be accepted or declined. Returns true if the trade was accepted and false if the trade was declined.
      * @async
      */
-    cancel(): Promise<void>;
+    waitTrade(): Promise<boolean>;
+    /**
+     * Adds one or more of a blook to a trade
+     * @param name - The blook to add to the trade
+     * @param {number} [count=1] - The number of blooks to trade. Default one.
+     */
+    tradeBlook(name: string, count?: number): void;
+    /**
+     * Removes a blook from the trade.
+     * @param name The name of the blook to remove.
+     */
+    removeBlook(name: string): void;
+    /**
+     * Declines a trade while inside.
+     */
+    declineTrade(): void;
+    acceptTrade(): void;
 }
 //# sourceMappingURL=TurtleClient.d.ts.map
