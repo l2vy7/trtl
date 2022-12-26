@@ -98,6 +98,9 @@ export class TurtleClient {
 		});
 
 
+		setInterval(() => {
+			this.socketEmit("heartbeat")
+		}, 15*1000)
 		// @ts-ignore
 		this.#socket.listenon = contextRemover__listenOn;
 
@@ -158,6 +161,10 @@ export class TurtleClient {
 				}
 			}
 		});
+	}
+
+	getSocket() {
+		return this.#socket;
 	}
 
 	/**

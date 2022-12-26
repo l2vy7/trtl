@@ -29,6 +29,7 @@ export declare class TurtleClient {
      *
      */
     constructor(session: string, instance?: string, proxy?: string, secure?: boolean);
+    getSocket(): WebSocket;
     /**
      * Hook code after a function is called. Great for plugins and middlewares.
      * @param {string} method - The name of the method in the class.
